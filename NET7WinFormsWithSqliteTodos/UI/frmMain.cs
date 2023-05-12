@@ -10,6 +10,8 @@ namespace NET7WinFormsWithSqliteTodos.UI
             InitializeComponent();
         }
 
+        ApplicationDbContext _dbContext = new ApplicationDbContext();
+
         /// <summary>
         /// This replaces the top text with the logged in Window's users name.
         /// </summary>
@@ -30,7 +32,10 @@ namespace NET7WinFormsWithSqliteTodos.UI
         {
             try
             {
-
+                ToDo todo = new ToDo();
+                todo.Name = txtTodoDesc.Text;
+                todo.Date = DateTime.Now;
+                todo.Description = DateTime.Now;
             }
             catch (Exception ex)
             {
@@ -75,7 +80,7 @@ namespace NET7WinFormsWithSqliteTodos.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tboxFilter_TextChanged(object sender, EventArgs e)
+        private void txtFilter_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -85,7 +90,7 @@ namespace NET7WinFormsWithSqliteTodos.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tboxAddTodo_TextChanged(object sender, EventArgs e)
+        private void txtAddTodo_TextChanged(object sender, EventArgs e)
         {
 
         }

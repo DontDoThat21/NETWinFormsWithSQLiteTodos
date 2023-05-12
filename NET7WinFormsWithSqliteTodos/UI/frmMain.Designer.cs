@@ -36,9 +36,12 @@
             btnCompleted = new Button();
             btnActive = new Button();
             btnAll = new Button();
-            tboxFilter = new TextBox();
-            tboxAddTodo = new TextBox();
+            txtTodoFilter = new TextBox();
+            txtTodoDesc = new TextBox();
             pboxAddNewToDo = new PictureBox();
+            lblTodoName = new Label();
+            txtTodoName = new TextBox();
+            label1 = new Label();
             gboxTodos.SuspendLayout();
             pnlToDosMaster.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -66,9 +69,12 @@
             // 
             // pnlToDosMaster
             // 
+            pnlToDosMaster.Controls.Add(label1);
+            pnlToDosMaster.Controls.Add(txtTodoName);
+            pnlToDosMaster.Controls.Add(lblTodoName);
             pnlToDosMaster.Controls.Add(groupBox1);
-            pnlToDosMaster.Controls.Add(tboxFilter);
-            pnlToDosMaster.Controls.Add(tboxAddTodo);
+            pnlToDosMaster.Controls.Add(txtTodoFilter);
+            pnlToDosMaster.Controls.Add(txtTodoDesc);
             pnlToDosMaster.Controls.Add(pboxAddNewToDo);
             pnlToDosMaster.Location = new Point(6, 25);
             pnlToDosMaster.Name = "pnlToDosMaster";
@@ -81,7 +87,7 @@
             groupBox1.Controls.Add(btnActive);
             groupBox1.Controls.Add(btnAll);
             groupBox1.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox1.Location = new Point(420, 40);
+            groupBox1.Location = new Point(420, 55);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(210, 61);
             groupBox1.TabIndex = 4;
@@ -117,26 +123,27 @@
             btnAll.UseVisualStyleBackColor = true;
             btnAll.Click += btnAll_Click;
             // 
-            // tboxFilter
+            // txtTodoFilter
             // 
-            tboxFilter.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            tboxFilter.Location = new Point(22, 63);
-            tboxFilter.Name = "tboxFilter";
-            tboxFilter.Size = new Size(392, 24);
-            tboxFilter.TabIndex = 3;
-            tboxFilter.Text = "type search filter here";
-            tboxFilter.TextAlign = HorizontalAlignment.Center;
-            tboxFilter.TextChanged += tboxFilter_TextChanged;
+            txtTodoFilter.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtTodoFilter.Location = new Point(15, 73);
+            txtTodoFilter.Name = "txtTodoFilter";
+            txtTodoFilter.Size = new Size(399, 24);
+            txtTodoFilter.TabIndex = 3;
+            txtTodoFilter.Text = "type search filter here";
+            txtTodoFilter.TextAlign = HorizontalAlignment.Center;
+            txtTodoFilter.TextChanged += txtFilter_TextChanged;
             // 
-            // tboxAddTodo
+            // txtTodoDesc
             // 
-            tboxAddTodo.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            tboxAddTodo.Location = new Point(3, 3);
-            tboxAddTodo.Name = "tboxAddTodo";
-            tboxAddTodo.Size = new Size(638, 24);
-            tboxAddTodo.TabIndex = 2;
-            tboxAddTodo.Text = "Add ToDo here";
-            tboxAddTodo.TextChanged += tboxAddTodo_TextChanged;
+            txtTodoDesc.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtTodoDesc.Location = new Point(116, 3);
+            txtTodoDesc.Name = "txtTodoDesc";
+            txtTodoDesc.Size = new Size(525, 24);
+            txtTodoDesc.TabIndex = 2;
+            txtTodoDesc.Text = "todo details here";
+            txtTodoDesc.TextAlign = HorizontalAlignment.Center;
+            txtTodoDesc.TextChanged += txtAddTodo_TextChanged;
             // 
             // pboxAddNewToDo
             // 
@@ -149,6 +156,34 @@
             pboxAddNewToDo.TabIndex = 1;
             pboxAddNewToDo.TabStop = false;
             pboxAddNewToDo.Click += pboxAddNewToDo_Click;
+            // 
+            // lblTodoName
+            // 
+            lblTodoName.AutoSize = true;
+            lblTodoName.Location = new Point(3, 35);
+            lblTodoName.Name = "lblTodoName";
+            lblTodoName.Size = new Size(75, 17);
+            lblTodoName.TabIndex = 5;
+            lblTodoName.Text = "ToDo Name:";
+            // 
+            // txtTodoName
+            // 
+            txtTodoName.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtTodoName.Location = new Point(80, 35);
+            txtTodoName.Name = "txtTodoName";
+            txtTodoName.Size = new Size(392, 24);
+            txtTodoName.TabIndex = 6;
+            txtTodoName.Text = "todo name here";
+            txtTodoName.TextAlign = HorizontalAlignment.Center;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(3, 6);
+            label1.Name = "label1";
+            label1.Size = new Size(110, 17);
+            label1.TabIndex = 7;
+            label1.Text = "ToDo Description:";
             // 
             // frmMain
             // 
@@ -173,13 +208,16 @@
 
         private GroupBox gboxTodos;
         private Panel pnlToDosMaster;
-        private TextBox tboxAddTodo;
-        private TextBox tboxFilter;
+        private TextBox txtTodoDesc;
+        private TextBox txtTodoFilter;
         private GroupBox groupBox1;
         private Button btnCompleted;
         private Button btnActive;
         private Button btnAll;
         private Panel pnlToDosBody;
         private PictureBox pboxAddNewToDo;
+        private Label label1;
+        private TextBox txtTodoName;
+        private Label lblTodoName;
     }
 }
