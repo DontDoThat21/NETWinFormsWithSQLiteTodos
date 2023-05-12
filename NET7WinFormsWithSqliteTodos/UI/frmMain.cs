@@ -34,7 +34,12 @@ namespace NET7WinFormsWithSqliteTodos.UI
 
         private void LoadTodos()
         {
-            
+            List<ToDo> todos = _dbContext.ToDos.ToList();
+            dgvTodos.Rows.Clear();
+            foreach (var todo in todos)
+            {
+                dgvTodos.Rows.Add(todo.Id, todo.TodoName, todo.Description, todo.Date);
+            }
         }
 
         /// <summary>
@@ -72,6 +77,7 @@ namespace NET7WinFormsWithSqliteTodos.UI
             finally
             {
                 Reset();
+                LoadTodos();
             }
         }
 
