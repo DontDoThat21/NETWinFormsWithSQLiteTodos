@@ -10,6 +10,11 @@ namespace NET7WinFormsWithSqliteTodos.UI
             InitializeComponent();
         }
 
+        /// <summary>
+        /// This replaces the top text with the logged in Window's users name.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmMain_Load(object sender, EventArgs e)
         {
             string userName = Environment.UserName;
