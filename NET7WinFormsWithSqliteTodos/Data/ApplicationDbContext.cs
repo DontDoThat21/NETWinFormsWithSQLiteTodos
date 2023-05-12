@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NET7WinFormsWithSqliteTodos.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NET7WinFormsWithSqliteTodos.Models
+namespace NET7WinFormsWithSqliteTodos.Data
 {
     public class ApplicationDbContext : DbContext
     {

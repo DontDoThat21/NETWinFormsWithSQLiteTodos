@@ -1,4 +1,5 @@
 ﻿
+using NET7WinFormsWithSqliteTodos.Data;
 using NET7WinFormsWithSqliteTodos.Models;
 
 namespace NET7WinFormsWithSqliteTodos.UI
@@ -21,6 +22,19 @@ namespace NET7WinFormsWithSqliteTodos.UI
         {
             string userName = Environment.UserName;
             this.Text = this.Text.Replace("User", userName);
+            LoadTodos();
+        }
+
+        private void Reset()
+        {
+            txtTodoDesc.Text = "todo details here";
+            txtTodoName.Text = "todo name here";
+            txtTodoFilter.Text = "type search filter here";
+        }
+
+        private void LoadTodos()
+        {
+            
         }
 
         /// <summary>
@@ -33,15 +47,31 @@ namespace NET7WinFormsWithSqliteTodos.UI
             try
             {
                 ToDo todo = new ToDo();
-                todo.Name = txtTodoDesc.Text;
-                todo.Date = DateTime.Now;
-                todo.Description = DateTime.Now;
+                todo.TodoName = txtTodoName.Text;
+                todo.Description = txtTodoDesc.Text;
+                _dbContext.ToDos.Add(todo);
+                if (_dbContext.SaveChanges() > 0)
+                {
+                    MessageBox.Show($"A new todo has been saved.", "Todo saved...",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Saving a new todo was not successful.", "Warning...",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Could not create a new todo. Error: {ex.Message}", "Error adding todo...",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Reset();
             }
         }
 
@@ -80,7 +110,7 @@ namespace NET7WinFormsWithSqliteTodos.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void txtFilter_TextChanged(object sender, EventArgs e)
+        private void txtTodoFilter_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -90,7 +120,12 @@ namespace NET7WinFormsWithSqliteTodos.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void txtAddTodo_TextChanged(object sender, EventArgs e)
+        private void txtTodoDesc_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTodoName_TextChanged(object sender, EventArgs e)
         {
 
         }

@@ -31,7 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             gboxTodos = new GroupBox();
             pnlToDosBody = new Panel();
+            dgvTodos = new DataGridView();
             pnlToDosMaster = new Panel();
+            label1 = new Label();
+            txtTodoName = new TextBox();
+            lblTodoName = new Label();
             groupBox1 = new GroupBox();
             btnCompleted = new Button();
             btnActive = new Button();
@@ -39,10 +43,13 @@
             txtTodoFilter = new TextBox();
             txtTodoDesc = new TextBox();
             pboxAddNewToDo = new PictureBox();
-            lblTodoName = new Label();
-            txtTodoName = new TextBox();
-            label1 = new Label();
+            Id = new DataGridViewTextBoxColumn();
+            TodoName = new DataGridViewTextBoxColumn();
+            Description = new DataGridViewTextBoxColumn();
+            DateTime = new DataGridViewTextBoxColumn();
             gboxTodos.SuspendLayout();
+            pnlToDosBody.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvTodos).BeginInit();
             pnlToDosMaster.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pboxAddNewToDo).BeginInit();
@@ -62,10 +69,22 @@
             // 
             // pnlToDosBody
             // 
+            pnlToDosBody.Controls.Add(dgvTodos);
             pnlToDosBody.Location = new Point(6, 157);
             pnlToDosBody.Name = "pnlToDosBody";
             pnlToDosBody.Size = new Size(764, 320);
             pnlToDosBody.TabIndex = 1;
+            // 
+            // dgvTodos
+            // 
+            dgvTodos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvTodos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvTodos.Columns.AddRange(new DataGridViewColumn[] { Id, TodoName, Description, DateTime });
+            dgvTodos.Location = new Point(3, 3);
+            dgvTodos.Name = "dgvTodos";
+            dgvTodos.RowTemplate.Height = 25;
+            dgvTodos.Size = new Size(758, 314);
+            dgvTodos.TabIndex = 0;
             // 
             // pnlToDosMaster
             // 
@@ -80,6 +99,35 @@
             pnlToDosMaster.Name = "pnlToDosMaster";
             pnlToDosMaster.Size = new Size(764, 126);
             pnlToDosMaster.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(3, 6);
+            label1.Name = "label1";
+            label1.Size = new Size(110, 17);
+            label1.TabIndex = 7;
+            label1.Text = "ToDo Description:";
+            // 
+            // txtTodoName
+            // 
+            txtTodoName.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtTodoName.Location = new Point(80, 35);
+            txtTodoName.Name = "txtTodoName";
+            txtTodoName.Size = new Size(392, 24);
+            txtTodoName.TabIndex = 6;
+            txtTodoName.Text = "todo name here";
+            txtTodoName.TextAlign = HorizontalAlignment.Center;
+            txtTodoName.TextChanged += txtTodoName_TextChanged;
+            // 
+            // lblTodoName
+            // 
+            lblTodoName.AutoSize = true;
+            lblTodoName.Location = new Point(3, 35);
+            lblTodoName.Name = "lblTodoName";
+            lblTodoName.Size = new Size(75, 17);
+            lblTodoName.TabIndex = 5;
+            lblTodoName.Text = "ToDo Name:";
             // 
             // groupBox1
             // 
@@ -132,7 +180,7 @@
             txtTodoFilter.TabIndex = 3;
             txtTodoFilter.Text = "type search filter here";
             txtTodoFilter.TextAlign = HorizontalAlignment.Center;
-            txtTodoFilter.TextChanged += txtFilter_TextChanged;
+            txtTodoFilter.TextChanged += txtTodoFilter_TextChanged;
             // 
             // txtTodoDesc
             // 
@@ -143,7 +191,7 @@
             txtTodoDesc.TabIndex = 2;
             txtTodoDesc.Text = "todo details here";
             txtTodoDesc.TextAlign = HorizontalAlignment.Center;
-            txtTodoDesc.TextChanged += txtAddTodo_TextChanged;
+            txtTodoDesc.TextChanged += txtTodoDesc_TextChanged;
             // 
             // pboxAddNewToDo
             // 
@@ -157,33 +205,26 @@
             pboxAddNewToDo.TabStop = false;
             pboxAddNewToDo.Click += pboxAddNewToDo_Click;
             // 
-            // lblTodoName
+            // Id
             // 
-            lblTodoName.AutoSize = true;
-            lblTodoName.Location = new Point(3, 35);
-            lblTodoName.Name = "lblTodoName";
-            lblTodoName.Size = new Size(75, 17);
-            lblTodoName.TabIndex = 5;
-            lblTodoName.Text = "ToDo Name:";
+            Id.HeaderText = "Id";
+            Id.Name = "Id";
+            Id.Visible = false;
             // 
-            // txtTodoName
+            // Name
             // 
-            txtTodoName.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTodoName.Location = new Point(80, 35);
-            txtTodoName.Name = "txtTodoName";
-            txtTodoName.Size = new Size(392, 24);
-            txtTodoName.TabIndex = 6;
-            txtTodoName.Text = "todo name here";
-            txtTodoName.TextAlign = HorizontalAlignment.Center;
+            TodoName.HeaderText = "Name";
+            TodoName.Name = "Name";
             // 
-            // label1
+            // Description
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 6);
-            label1.Name = "label1";
-            label1.Size = new Size(110, 17);
-            label1.TabIndex = 7;
-            label1.Text = "ToDo Description:";
+            Description.HeaderText = "Description";
+            Description.Name = "Description";
+            // 
+            // DateTime
+            // 
+            DateTime.HeaderText = "Date Added";
+            DateTime.Name = "DateTime";
             // 
             // frmMain
             // 
@@ -197,6 +238,8 @@
             Text = "ToDos - User";
             Load += frmMain_Load;
             gboxTodos.ResumeLayout(false);
+            pnlToDosBody.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvTodos).EndInit();
             pnlToDosMaster.ResumeLayout(false);
             pnlToDosMaster.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -219,5 +262,10 @@
         private Label label1;
         private TextBox txtTodoName;
         private Label lblTodoName;
+        private DataGridView dgvTodos;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn TodoName;
+        private DataGridViewTextBoxColumn Description;
+        private DataGridViewTextBoxColumn DateTime;
     }
 }
