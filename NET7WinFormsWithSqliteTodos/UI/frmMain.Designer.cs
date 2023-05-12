@@ -28,20 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             gboxTodos = new GroupBox();
-            pnlToDosMaster = new Panel();
-            pboxAddNewToDo = new PictureBox();
-            tboxAddTodo = new TextBox();
-            tboxFilter = new TextBox();
-            groupBox1 = new GroupBox();
-            btnAll = new Button();
-            btnActive = new Button();
-            btnComplete = new Button();
             pnlToDosBody = new Panel();
+            pnlToDosMaster = new Panel();
+            groupBox1 = new GroupBox();
+            btnCompleted = new Button();
+            btnActive = new Button();
+            btnAll = new Button();
+            tboxFilter = new TextBox();
+            tboxAddTodo = new TextBox();
+            pboxAddNewToDo = new PictureBox();
             gboxTodos.SuspendLayout();
             pnlToDosMaster.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pboxAddNewToDo).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pboxAddNewToDo).BeginInit();
             SuspendLayout();
             // 
             // gboxTodos
@@ -56,6 +57,13 @@
             gboxTodos.TabStop = false;
             gboxTodos.Text = "ToDos ";
             // 
+            // pnlToDosBody
+            // 
+            pnlToDosBody.Location = new Point(6, 157);
+            pnlToDosBody.Name = "pnlToDosBody";
+            pnlToDosBody.Size = new Size(764, 320);
+            pnlToDosBody.TabIndex = 1;
+            // 
             // pnlToDosMaster
             // 
             pnlToDosMaster.Controls.Add(groupBox1);
@@ -67,36 +75,9 @@
             pnlToDosMaster.Size = new Size(764, 126);
             pnlToDosMaster.TabIndex = 0;
             // 
-            // pboxAddNewToDo
-            // 
-            pboxAddNewToDo.Location = new Point(647, 3);
-            pboxAddNewToDo.Name = "pboxAddNewToDo";
-            pboxAddNewToDo.Size = new Size(114, 119);
-            pboxAddNewToDo.TabIndex = 1;
-            pboxAddNewToDo.TabStop = false;
-            // 
-            // tboxAddTodo
-            // 
-            tboxAddTodo.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            tboxAddTodo.Location = new Point(3, 3);
-            tboxAddTodo.Name = "tboxAddTodo";
-            tboxAddTodo.Size = new Size(638, 24);
-            tboxAddTodo.TabIndex = 2;
-            tboxAddTodo.Text = "Add ToDo here";
-            // 
-            // tboxFilter
-            // 
-            tboxFilter.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            tboxFilter.Location = new Point(22, 63);
-            tboxFilter.Name = "tboxFilter";
-            tboxFilter.Size = new Size(392, 24);
-            tboxFilter.TabIndex = 3;
-            tboxFilter.Text = "type search filter here";
-            tboxFilter.TextAlign = HorizontalAlignment.Center;
-            // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(btnComplete);
+            groupBox1.Controls.Add(btnCompleted);
             groupBox1.Controls.Add(btnActive);
             groupBox1.Controls.Add(btnAll);
             groupBox1.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -105,6 +86,26 @@
             groupBox1.Size = new Size(210, 61);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
+            // 
+            // btnCompleted
+            // 
+            btnCompleted.Location = new Point(124, 10);
+            btnCompleted.Name = "btnCompleted";
+            btnCompleted.Size = new Size(80, 48);
+            btnCompleted.TabIndex = 2;
+            btnCompleted.Text = "completed";
+            btnCompleted.UseVisualStyleBackColor = true;
+            btnCompleted.Click += btnCompleted_Click;
+            // 
+            // btnActive
+            // 
+            btnActive.Location = new Point(53, 10);
+            btnActive.Name = "btnActive";
+            btnActive.Size = new Size(65, 48);
+            btnActive.TabIndex = 1;
+            btnActive.Text = "active";
+            btnActive.UseVisualStyleBackColor = true;
+            btnActive.Click += btnActive_Click;
             // 
             // btnAll
             // 
@@ -116,30 +117,38 @@
             btnAll.UseVisualStyleBackColor = true;
             btnAll.Click += btnAll_Click;
             // 
-            // btnActive
+            // tboxFilter
             // 
-            btnActive.Location = new Point(53, 10);
-            btnActive.Name = "btnActive";
-            btnActive.Size = new Size(65, 48);
-            btnActive.TabIndex = 1;
-            btnActive.Text = "active";
-            btnActive.UseVisualStyleBackColor = true;
+            tboxFilter.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tboxFilter.Location = new Point(22, 63);
+            tboxFilter.Name = "tboxFilter";
+            tboxFilter.Size = new Size(392, 24);
+            tboxFilter.TabIndex = 3;
+            tboxFilter.Text = "type search filter here";
+            tboxFilter.TextAlign = HorizontalAlignment.Center;
+            tboxFilter.TextChanged += tboxFilter_TextChanged;
             // 
-            // btnComplete
+            // tboxAddTodo
             // 
-            btnComplete.Location = new Point(124, 10);
-            btnComplete.Name = "btnComplete";
-            btnComplete.Size = new Size(80, 48);
-            btnComplete.TabIndex = 2;
-            btnComplete.Text = "completed";
-            btnComplete.UseVisualStyleBackColor = true;
+            tboxAddTodo.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            tboxAddTodo.Location = new Point(3, 3);
+            tboxAddTodo.Name = "tboxAddTodo";
+            tboxAddTodo.Size = new Size(638, 24);
+            tboxAddTodo.TabIndex = 2;
+            tboxAddTodo.Text = "Add ToDo here";
+            tboxAddTodo.TextChanged += tboxAddTodo_TextChanged;
             // 
-            // pnlToDosBody
+            // pboxAddNewToDo
             // 
-            pnlToDosBody.Location = new Point(6, 157);
-            pnlToDosBody.Name = "pnlToDosBody";
-            pnlToDosBody.Size = new Size(764, 320);
-            pnlToDosBody.TabIndex = 1;
+            pboxAddNewToDo.Image = (Image)resources.GetObject("pboxAddNewToDo.Image");
+            pboxAddNewToDo.InitialImage = (Image)resources.GetObject("pboxAddNewToDo.InitialImage");
+            pboxAddNewToDo.Location = new Point(647, 3);
+            pboxAddNewToDo.Name = "pboxAddNewToDo";
+            pboxAddNewToDo.Size = new Size(114, 119);
+            pboxAddNewToDo.SizeMode = PictureBoxSizeMode.StretchImage;
+            pboxAddNewToDo.TabIndex = 1;
+            pboxAddNewToDo.TabStop = false;
+            pboxAddNewToDo.Click += pboxAddNewToDo_Click;
             // 
             // frmMain
             // 
@@ -155,8 +164,8 @@
             gboxTodos.ResumeLayout(false);
             pnlToDosMaster.ResumeLayout(false);
             pnlToDosMaster.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pboxAddNewToDo).EndInit();
             groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pboxAddNewToDo).EndInit();
             ResumeLayout(false);
         }
 
@@ -164,13 +173,13 @@
 
         private GroupBox gboxTodos;
         private Panel pnlToDosMaster;
-        private PictureBox pboxAddNewToDo;
         private TextBox tboxAddTodo;
         private TextBox tboxFilter;
         private GroupBox groupBox1;
-        private Button btnComplete;
+        private Button btnCompleted;
         private Button btnActive;
         private Button btnAll;
         private Panel pnlToDosBody;
+        private PictureBox pboxAddNewToDo;
     }
 }
