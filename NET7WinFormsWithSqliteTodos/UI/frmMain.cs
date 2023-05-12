@@ -34,7 +34,9 @@ namespace NET7WinFormsWithSqliteTodos.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Could not create a new todo. Error: {ex.Message}");
+                MessageBox.Show($"Could not create a new todo. Error: {ex.Message}", "Error adding todo...",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
