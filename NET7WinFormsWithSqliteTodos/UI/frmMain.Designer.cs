@@ -37,6 +37,7 @@
             btnAll = new Button();
             btnActive = new Button();
             btnComplete = new Button();
+            pnlToDosBody = new Panel();
             gboxTodos.SuspendLayout();
             pnlToDosMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pboxAddNewToDo).BeginInit();
@@ -45,6 +46,7 @@
             // 
             // gboxTodos
             // 
+            gboxTodos.Controls.Add(pnlToDosBody);
             gboxTodos.Controls.Add(pnlToDosMaster);
             gboxTodos.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
             gboxTodos.Location = new Point(12, 14);
@@ -132,6 +134,13 @@
             btnComplete.Text = "completed";
             btnComplete.UseVisualStyleBackColor = true;
             // 
+            // pnlToDosBody
+            // 
+            pnlToDosBody.Location = new Point(6, 157);
+            pnlToDosBody.Name = "pnlToDosBody";
+            pnlToDosBody.Size = new Size(764, 320);
+            pnlToDosBody.TabIndex = 1;
+            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -162,5 +171,6 @@
         private Button btnComplete;
         private Button btnActive;
         private Button btnAll;
+        private Panel pnlToDosBody;
     }
 }
