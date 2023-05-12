@@ -21,7 +21,7 @@ namespace NET7WinFormsWithSqliteTodos.UI
         private void frmMain_Load(object sender, EventArgs e)
         {
             string userName = Environment.UserName;
-            this.Text = this.Text.Replace("User", userName);
+            this.Text = this.Text.Replace("{User}", userName);
             LoadTodos();
         }
 
@@ -134,6 +134,13 @@ namespace NET7WinFormsWithSqliteTodos.UI
         private void txtTodoName_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgvTodos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow dgvR = dgvTodos.SelectedRows[0];
+            frmTodosDetail frmTodos = new frmTodosDetail();
+            frmTodos.ShowDialog();
         }
     }
 }

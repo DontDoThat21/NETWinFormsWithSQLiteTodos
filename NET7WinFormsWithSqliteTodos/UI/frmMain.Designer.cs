@@ -46,6 +46,7 @@
             Id = new DataGridViewTextBoxColumn();
             TodoName = new DataGridViewTextBoxColumn();
             Description = new DataGridViewTextBoxColumn();
+            Status = new DataGridViewTextBoxColumn();
             DateTime = new DataGridViewTextBoxColumn();
             gboxTodos.SuspendLayout();
             pnlToDosBody.SuspendLayout();
@@ -79,12 +80,13 @@
             // 
             dgvTodos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTodos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTodos.Columns.AddRange(new DataGridViewColumn[] { Id, TodoName, Description, DateTime });
+            dgvTodos.Columns.AddRange(new DataGridViewColumn[] { Id, TodoName, Description, Status, DateTime });
             dgvTodos.Location = new Point(3, 3);
             dgvTodos.Name = "dgvTodos";
             dgvTodos.RowTemplate.Height = 25;
             dgvTodos.Size = new Size(758, 314);
             dgvTodos.TabIndex = 0;
+            dgvTodos.CellDoubleClick += dgvTodos_CellDoubleClick;
             // 
             // pnlToDosMaster
             // 
@@ -211,15 +213,20 @@
             Id.Name = "Id";
             Id.Visible = false;
             // 
-            // Name
+            // TodoName
             // 
             TodoName.HeaderText = "Name";
-            TodoName.Name = "Name";
+            TodoName.Name = "TodoName";
             // 
             // Description
             // 
             Description.HeaderText = "Description";
             Description.Name = "Description";
+            // 
+            // Status
+            // 
+            Status.HeaderText = "Status";
+            Status.Name = "Status";
             // 
             // DateTime
             // 
@@ -235,7 +242,7 @@
             Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
             Name = "frmMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ToDos - User";
+            Text = "ToDos - {User}";
             Load += frmMain_Load;
             gboxTodos.ResumeLayout(false);
             pnlToDosBody.ResumeLayout(false);
@@ -266,6 +273,7 @@
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn TodoName;
         private DataGridViewTextBoxColumn Description;
+        private DataGridViewTextBoxColumn Status;
         private DataGridViewTextBoxColumn DateTime;
     }
 }
