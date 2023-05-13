@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NET7WinFormsWithSqliteTodos.Data;
+using NET7WinFormsWithSqliteTodos.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +14,15 @@ namespace NET7WinFormsWithSqliteTodos.UI
 {
     public partial class frmTodoDetail : Form
     {
-        public frmTodoDetail()
+        frmMain _main;
+        public frmTodoDetail(Form main)
         {
             InitializeComponent();
+            _main = (frmMain?)main;
         }
+
+        TodosManager _todoManager = new TodosManager();
+
         public void SetStatusButton(string status)
         {
             Button btn = new Button();
@@ -43,9 +50,74 @@ namespace NET7WinFormsWithSqliteTodos.UI
             btn.BackColor = Color.FromName("ControlDark");
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        public string GetCurrentTodoStatus()
+        {
+            string status = "";
+            foreach (var obj in gboxStatus.Controls)
+            {
+                Button btn = (Button)obj;
+                if (btn.BackColor == Color.FromName("ControlDark"))
+                {
+                    status = btn.Text;
+                    break;
+                }
+            }
+            return status;
+        }
+
+        private void btnSaveTodo_Click(object sender, EventArgs e)
         {
 
+            try
+            {
+                ToDo todo = new ToDo(); //_dbContext.ToDos.FirstOrDefault(t => t.Id == id);
+                if (string.IsNullOrEmpty(txtTodoName.Text))
+                {
+                    MessageBox.Show("Please enter name.", "Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtTodoName.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(txtTodoDesc.Text))
+                {
+                    MessageBox.Show("Please enter todo description.", "Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtTodoDesc.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(dateTodoBy.Value.ToString()))
+                {
+                    MessageBox.Show("Please enter a todo date.", "Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    dateTodoBy.Focus();
+                    return;
+                }
+                todo.TodoName = txtTodoName.Text;
+                todo.Description = txtTodoDesc.Text;
+                todo.Status = GetCurrentTodoStatus();
+                todo.DateToBeCompleted = dateTodoBy.Value;
+                if (_todoManager.Update(todo))
+                {
+                    MessageBox.Show("Student has been modified.", "Information",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                    _main.LoadTodos();
+                    _main.ResetText();
+                    _main.Visible = true;
+                    this.Dispose();
+
+                }
+                else
+                {
+                    MessageBox.Show("Todo update failed.", "Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void btnAll_Click(object sender, EventArgs e)
         {

@@ -30,7 +30,7 @@
         {
             groupBox1 = new GroupBox();
             pnlToDosMaster = new Panel();
-            button1 = new Button();
+            btnSaveTodo = new Button();
             dateTodoBy = new DateTimePicker();
             lblTodoBy = new Label();
             lblId = new Label();
@@ -38,14 +38,14 @@
             lblDesc = new Label();
             txtTodoName = new TextBox();
             lblTodoName = new Label();
-            groupBox2 = new GroupBox();
+            gboxStatus = new GroupBox();
             btnCompleted = new Button();
             btnActive = new Button();
             btnAll = new Button();
             txtTodoDesc = new TextBox();
             groupBox1.SuspendLayout();
             pnlToDosMaster.SuspendLayout();
-            groupBox2.SuspendLayout();
+            gboxStatus.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -61,7 +61,7 @@
             // pnlToDosMaster
             // 
             pnlToDosMaster.BackColor = SystemColors.ControlLight;
-            pnlToDosMaster.Controls.Add(button1);
+            pnlToDosMaster.Controls.Add(btnSaveTodo);
             pnlToDosMaster.Controls.Add(dateTodoBy);
             pnlToDosMaster.Controls.Add(lblTodoBy);
             pnlToDosMaster.Controls.Add(lblId);
@@ -69,23 +69,23 @@
             pnlToDosMaster.Controls.Add(lblDesc);
             pnlToDosMaster.Controls.Add(txtTodoName);
             pnlToDosMaster.Controls.Add(lblTodoName);
-            pnlToDosMaster.Controls.Add(groupBox2);
+            pnlToDosMaster.Controls.Add(gboxStatus);
             pnlToDosMaster.Controls.Add(txtTodoDesc);
             pnlToDosMaster.Location = new Point(6, 20);
             pnlToDosMaster.Name = "pnlToDosMaster";
             pnlToDosMaster.Size = new Size(651, 172);
             pnlToDosMaster.TabIndex = 1;
             // 
-            // button1
+            // btnSaveTodo
             // 
-            button1.BackColor = SystemColors.ControlDark;
-            button1.Location = new Point(299, 129);
-            button1.Name = "button1";
-            button1.Size = new Size(336, 37);
-            button1.TabIndex = 12;
-            button1.Text = "SAVE";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += btnSave_Click;
+            btnSaveTodo.BackColor = SystemColors.ControlDark;
+            btnSaveTodo.Location = new Point(299, 129);
+            btnSaveTodo.Name = "btnSaveTodo";
+            btnSaveTodo.Size = new Size(336, 37);
+            btnSaveTodo.TabIndex = 12;
+            btnSaveTodo.Text = "SAVE";
+            btnSaveTodo.UseVisualStyleBackColor = false;
+            btnSaveTodo.Click += btnSaveTodo_Click;
             // 
             // dateTodoBy
             // 
@@ -124,7 +124,7 @@
             // lblDesc
             // 
             lblDesc.AutoSize = true;
-            lblDesc.Location = new Point(3, 6);
+            lblDesc.Location = new Point(21, 42);
             lblDesc.Name = "lblDesc";
             lblDesc.Size = new Size(100, 15);
             lblDesc.TabIndex = 7;
@@ -133,9 +133,9 @@
             // txtTodoName
             // 
             txtTodoName.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTodoName.Location = new Point(80, 38);
+            txtTodoName.Location = new Point(145, 8);
             txtTodoName.Name = "txtTodoName";
-            txtTodoName.Size = new Size(392, 24);
+            txtTodoName.Size = new Size(364, 24);
             txtTodoName.TabIndex = 6;
             txtTodoName.Text = "todo name here";
             txtTodoName.TextAlign = HorizontalAlignment.Center;
@@ -143,23 +143,23 @@
             // lblTodoName
             // 
             lblTodoName.AutoSize = true;
-            lblTodoName.Location = new Point(2, 42);
+            lblTodoName.Location = new Point(67, 12);
             lblTodoName.Name = "lblTodoName";
             lblTodoName.Size = new Size(72, 15);
             lblTodoName.TabIndex = 5;
             lblTodoName.Text = "ToDo Name:";
             // 
-            // groupBox2
+            // gboxStatus
             // 
-            groupBox2.Controls.Add(btnCompleted);
-            groupBox2.Controls.Add(btnActive);
-            groupBox2.Controls.Add(btnAll);
-            groupBox2.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            groupBox2.Location = new Point(80, 65);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(561, 61);
-            groupBox2.TabIndex = 4;
-            groupBox2.TabStop = false;
+            gboxStatus.Controls.Add(btnCompleted);
+            gboxStatus.Controls.Add(btnActive);
+            gboxStatus.Controls.Add(btnAll);
+            gboxStatus.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            gboxStatus.Location = new Point(80, 65);
+            gboxStatus.Name = "gboxStatus";
+            gboxStatus.Size = new Size(561, 61);
+            gboxStatus.TabIndex = 4;
+            gboxStatus.TabStop = false;
             // 
             // btnCompleted
             // 
@@ -197,9 +197,9 @@
             // txtTodoDesc
             // 
             txtTodoDesc.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTodoDesc.Location = new Point(116, 3);
+            txtTodoDesc.Location = new Point(127, 38);
             txtTodoDesc.Name = "txtTodoDesc";
-            txtTodoDesc.Size = new Size(525, 24);
+            txtTodoDesc.Size = new Size(514, 24);
             txtTodoDesc.TabIndex = 2;
             txtTodoDesc.Text = "todo details here";
             txtTodoDesc.TextAlign = HorizontalAlignment.Center;
@@ -215,7 +215,7 @@
             groupBox1.ResumeLayout(false);
             pnlToDosMaster.ResumeLayout(false);
             pnlToDosMaster.PerformLayout();
-            groupBox2.ResumeLayout(false);
+            gboxStatus.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -224,7 +224,7 @@
         private Label lblTodoMarkAs;
         private Label lblDesc;
         private Label lblTodoName;
-        private GroupBox groupBox2;
+        private GroupBox gboxStatus;
         public Label lblId;
         public TextBox txtTodoName;
         public TextBox txtTodoDesc;
@@ -233,7 +233,7 @@
         public Button btnAll;
         public GroupBox groupBox1;
         private Label lblTodoBy;
-        private Button button1;
+        private Button btnSaveTodo;
         public DateTimePicker dateTodoBy;
     }
 }

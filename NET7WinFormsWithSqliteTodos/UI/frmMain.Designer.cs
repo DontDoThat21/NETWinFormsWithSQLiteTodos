@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             gboxTodos = new GroupBox();
             pnlToDosBody = new Panel();
@@ -38,12 +39,14 @@
             Status = new DataGridViewTextBoxColumn();
             CompleteBy = new DataGridViewTextBoxColumn();
             DateTime = new DataGridViewTextBoxColumn();
+            contextMenuDGVTodos = new ContextMenuStrip(components);
+            deleteToolStripMenuItem = new ToolStripMenuItem();
             pnlToDosMaster = new Panel();
             dateTodoBy = new DateTimePicker();
             lblTodoBy = new Label();
+            lblTodoName = new Label();
             label1 = new Label();
             txtTodoName = new TextBox();
-            lblTodoName = new Label();
             gboxStatus = new GroupBox();
             btnCompleted = new Button();
             btnActive = new Button();
@@ -54,6 +57,7 @@
             gboxTodos.SuspendLayout();
             pnlToDosBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTodos).BeginInit();
+            contextMenuDGVTodos.SuspendLayout();
             pnlToDosMaster.SuspendLayout();
             gboxStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pboxAddNewToDo).BeginInit();
@@ -84,9 +88,11 @@
             dgvTodos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTodos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTodos.Columns.AddRange(new DataGridViewColumn[] { Id, TodoName, Description, Status, CompleteBy, DateTime });
+            dgvTodos.ContextMenuStrip = contextMenuDGVTodos;
             dgvTodos.Location = new Point(3, 3);
             dgvTodos.Name = "dgvTodos";
             dgvTodos.RowTemplate.Height = 25;
+            dgvTodos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTodos.Size = new Size(758, 314);
             dgvTodos.TabIndex = 0;
             dgvTodos.CellDoubleClick += dgvTodos_CellDoubleClick;
@@ -122,14 +128,27 @@
             DateTime.HeaderText = "Date Added";
             DateTime.Name = "DateTime";
             // 
+            // contextMenuDGVTodos
+            // 
+            contextMenuDGVTodos.Items.AddRange(new ToolStripItem[] { deleteToolStripMenuItem });
+            contextMenuDGVTodos.Name = "contextMenuStrip1";
+            contextMenuDGVTodos.Size = new Size(108, 26);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            deleteToolStripMenuItem.Size = new Size(107, 22);
+            deleteToolStripMenuItem.Text = "Delete";
+            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
+            // 
             // pnlToDosMaster
             // 
             pnlToDosMaster.BackColor = SystemColors.ControlLight;
             pnlToDosMaster.Controls.Add(dateTodoBy);
             pnlToDosMaster.Controls.Add(lblTodoBy);
+            pnlToDosMaster.Controls.Add(lblTodoName);
             pnlToDosMaster.Controls.Add(label1);
             pnlToDosMaster.Controls.Add(txtTodoName);
-            pnlToDosMaster.Controls.Add(lblTodoName);
             pnlToDosMaster.Controls.Add(gboxStatus);
             pnlToDosMaster.Controls.Add(txtTodoFilter);
             pnlToDosMaster.Controls.Add(txtTodoDesc);
@@ -156,10 +175,19 @@
             lblTodoBy.TabIndex = 8;
             lblTodoBy.Text = "ToDo By:";
             // 
+            // lblTodoName
+            // 
+            lblTodoName.AutoSize = true;
+            lblTodoName.Location = new Point(65, 6);
+            lblTodoName.Name = "lblTodoName";
+            lblTodoName.Size = new Size(75, 17);
+            lblTodoName.TabIndex = 5;
+            lblTodoName.Text = "ToDo Name:";
+            // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(3, 6);
+            label1.Location = new Point(3, 33);
             label1.Name = "label1";
             label1.Size = new Size(110, 17);
             label1.TabIndex = 7;
@@ -168,22 +196,13 @@
             // txtTodoName
             // 
             txtTodoName.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTodoName.Location = new Point(80, 35);
+            txtTodoName.Location = new Point(146, 3);
             txtTodoName.Name = "txtTodoName";
             txtTodoName.Size = new Size(392, 24);
             txtTodoName.TabIndex = 6;
             txtTodoName.Text = "todo name here";
             txtTodoName.TextAlign = HorizontalAlignment.Center;
             txtTodoName.TextChanged += txtTodoName_TextChanged;
-            // 
-            // lblTodoName
-            // 
-            lblTodoName.AutoSize = true;
-            lblTodoName.Location = new Point(3, 35);
-            lblTodoName.Name = "lblTodoName";
-            lblTodoName.Size = new Size(75, 17);
-            lblTodoName.TabIndex = 5;
-            lblTodoName.Text = "ToDo Name:";
             // 
             // gboxStatus
             // 
@@ -199,7 +218,7 @@
             // 
             // btnCompleted
             // 
-            btnCompleted.BackColor = SystemColors.ControlDark;
+            btnCompleted.BackColor = SystemColors.Control;
             btnCompleted.Location = new Point(124, 10);
             btnCompleted.Name = "btnCompleted";
             btnCompleted.Size = new Size(80, 48);
@@ -210,7 +229,7 @@
             // 
             // btnActive
             // 
-            btnActive.BackColor = SystemColors.ControlDark;
+            btnActive.BackColor = SystemColors.Control;
             btnActive.Location = new Point(53, 10);
             btnActive.Name = "btnActive";
             btnActive.Size = new Size(65, 48);
@@ -221,7 +240,7 @@
             // 
             // btnAll
             // 
-            btnAll.BackColor = SystemColors.ControlDark;
+            btnAll.BackColor = SystemColors.Control;
             btnAll.Location = new Point(6, 10);
             btnAll.Name = "btnAll";
             btnAll.Size = new Size(41, 48);
@@ -244,7 +263,7 @@
             // txtTodoDesc
             // 
             txtTodoDesc.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTodoDesc.Location = new Point(116, 3);
+            txtTodoDesc.Location = new Point(116, 31);
             txtTodoDesc.Name = "txtTodoDesc";
             txtTodoDesc.Size = new Size(525, 24);
             txtTodoDesc.TabIndex = 2;
@@ -255,7 +274,7 @@
             // pboxAddNewToDo
             // 
             pboxAddNewToDo.BackColor = SystemColors.ActiveCaptionText;
-            pboxAddNewToDo.Image = (Image)resources.GetObject("pboxAddNewToDo.Image");
+            pboxAddNewToDo.Image = Properties.Resources.btnAddTodoInvalid;
             pboxAddNewToDo.InitialImage = (Image)resources.GetObject("pboxAddNewToDo.InitialImage");
             pboxAddNewToDo.Location = new Point(647, 3);
             pboxAddNewToDo.Name = "pboxAddNewToDo";
@@ -264,6 +283,7 @@
             pboxAddNewToDo.TabIndex = 1;
             pboxAddNewToDo.TabStop = false;
             pboxAddNewToDo.Click += pboxAddNewToDo_Click;
+            pboxAddNewToDo.MouseHover += pboxAddNewToDo_MouseHover;
             // 
             // frmMain
             // 
@@ -279,6 +299,7 @@
             gboxTodos.ResumeLayout(false);
             pnlToDosBody.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvTodos).EndInit();
+            contextMenuDGVTodos.ResumeLayout(false);
             pnlToDosMaster.ResumeLayout(false);
             pnlToDosMaster.PerformLayout();
             gboxStatus.ResumeLayout(false);
@@ -301,7 +322,6 @@
         private Label label1;
         private TextBox txtTodoName;
         private Label lblTodoName;
-        private DataGridView dgvTodos;
         private DateTimePicker dateTodoBy;
         private Label lblTodoBy;
         private DataGridViewTextBoxColumn Id;
@@ -310,5 +330,8 @@
         private DataGridViewTextBoxColumn Status;
         private DataGridViewTextBoxColumn CompleteBy;
         private DataGridViewTextBoxColumn DateTime;
+        public DataGridView dgvTodos;
+        private ContextMenuStrip contextMenuDGVTodos;
+        private ToolStripMenuItem deleteToolStripMenuItem;
     }
 }
