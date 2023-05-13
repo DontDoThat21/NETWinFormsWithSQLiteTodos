@@ -30,7 +30,7 @@
         {
             groupBox1 = new GroupBox();
             pnlToDosMaster = new Panel();
-            btnSaveTodo = new Button();
+            btnUpdateTodo = new Button();
             dateTodoBy = new DateTimePicker();
             lblTodoBy = new Label();
             lblId = new Label();
@@ -61,7 +61,7 @@
             // pnlToDosMaster
             // 
             pnlToDosMaster.BackColor = SystemColors.ControlLight;
-            pnlToDosMaster.Controls.Add(btnSaveTodo);
+            pnlToDosMaster.Controls.Add(btnUpdateTodo);
             pnlToDosMaster.Controls.Add(dateTodoBy);
             pnlToDosMaster.Controls.Add(lblTodoBy);
             pnlToDosMaster.Controls.Add(lblId);
@@ -76,16 +76,16 @@
             pnlToDosMaster.Size = new Size(651, 172);
             pnlToDosMaster.TabIndex = 1;
             // 
-            // btnSaveTodo
+            // btnUpdateTodo
             // 
-            btnSaveTodo.BackColor = SystemColors.ControlDark;
-            btnSaveTodo.Location = new Point(299, 129);
-            btnSaveTodo.Name = "btnSaveTodo";
-            btnSaveTodo.Size = new Size(336, 37);
-            btnSaveTodo.TabIndex = 12;
-            btnSaveTodo.Text = "SAVE";
-            btnSaveTodo.UseVisualStyleBackColor = false;
-            btnSaveTodo.Click += btnSaveTodo_Click;
+            btnUpdateTodo.BackColor = SystemColors.ControlDark;
+            btnUpdateTodo.Location = new Point(299, 129);
+            btnUpdateTodo.Name = "btnUpdateTodo";
+            btnUpdateTodo.Size = new Size(336, 37);
+            btnUpdateTodo.TabIndex = 12;
+            btnUpdateTodo.Text = "UPDATE";
+            btnUpdateTodo.UseVisualStyleBackColor = false;
+            btnUpdateTodo.Click += btnUpdateTodo_Click;
             // 
             // dateTodoBy
             // 
@@ -233,7 +233,7 @@
         public Button btnAll;
         public GroupBox groupBox1;
         private Label lblTodoBy;
-        private Button btnSaveTodo;
+        private Button btnUpdateTodo;
         public DateTimePicker dateTodoBy;
     }
 }

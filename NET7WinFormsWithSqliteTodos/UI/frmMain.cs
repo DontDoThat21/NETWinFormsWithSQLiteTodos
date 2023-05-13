@@ -47,16 +47,26 @@ namespace NET7WinFormsWithSqliteTodos.UI
 
         public void LoadTodos()
         {
-            TodosManager todosManager = new TodosManager();
-            List<ToDo> todos = todosManager.GetAll();
-            dgvTodos.Rows.Clear();
-            foreach (var todo in todos)
+            try
             {
-                dgvTodos.Rows.Add(todo.Id, todo.TodoName, todo.Description,
-                    todo.Status, todo.DateToBeCompleted, todo.DateAdded);
+                TodosManager todosManager = new TodosManager();
+                List<ToDo> todos = todosManager.GetAll();
+                dgvTodos.Rows.Clear();
+                foreach (var todo in todos)
+                {
+                    dgvTodos.Rows.Add(todo.Id, todo.TodoName, todo.Description,
+                        todo.Status, todo.DateToBeCompleted, todo.DateAdded);
+                }
+                dgvTodos.Refresh();
             }
-            dgvTodos.Refresh();
-
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}",
+                    "Couldn't load todos.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
         }
 
         /// <summary>
@@ -208,7 +218,16 @@ namespace NET7WinFormsWithSqliteTodos.UI
         /// <param name="e"></param>
         private void txtTodoFilter_TextChanged(object sender, EventArgs e)
         {
-            ValidateNewButtonSubmission();
+            BindingSource bs = new BindingSource();
+            bs.DataSource = dgvTodos.DataSource;
+            bs.Filter += dgvTodos.Columns[1].HeaderText.ToString() + " LIKE '%" + txtTodoFilter.Text + "%'";
+            bs.Filter += dgvTodos.Columns[2].HeaderText.ToString() + " LIKE '%" + txtTodoFilter.Text + "%'";
+            bs.Filter += dgvTodos.Columns[3].HeaderText.ToString() + " LIKE '%" + txtTodoFilter.Text + "%'";
+            bs.Filter += dgvTodos.Columns[4].HeaderText.ToString() + " LIKE '%" + txtTodoFilter.Text + "%'";
+
+            dgvTodos.DataSource = bs;
+
+            //ValidateNewButtonSubmission();
         }
 
         private bool ValidateNewButtonSubmission()
@@ -349,6 +368,12 @@ namespace NET7WinFormsWithSqliteTodos.UI
                 MessageBox.Show(ex.Message, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void pboxFilterReset_Click(object sender, EventArgs e)
+        {
+            txtTodoFilter.Text = string.Empty;
+            LoadTodos();
         }
     }
 }

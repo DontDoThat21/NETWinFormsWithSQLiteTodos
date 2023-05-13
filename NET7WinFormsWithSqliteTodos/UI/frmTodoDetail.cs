@@ -65,60 +65,6 @@ namespace NET7WinFormsWithSqliteTodos.UI
             return status;
         }
 
-        private void btnSaveTodo_Click(object sender, EventArgs e)
-        {
-
-            try
-            {
-                ToDo todo = new ToDo(); //_dbContext.ToDos.FirstOrDefault(t => t.Id == id);
-                if (string.IsNullOrEmpty(txtTodoName.Text))
-                {
-                    MessageBox.Show("Please enter name.", "Warning",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtTodoName.Focus();
-                    return;
-                }
-                if (string.IsNullOrEmpty(txtTodoDesc.Text))
-                {
-                    MessageBox.Show("Please enter todo description.", "Warning",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtTodoDesc.Focus();
-                    return;
-                }
-                if (string.IsNullOrEmpty(dateTodoBy.Value.ToString()))
-                {
-                    MessageBox.Show("Please enter a todo date.", "Warning",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    dateTodoBy.Focus();
-                    return;
-                }
-                todo.TodoName = txtTodoName.Text;
-                todo.Description = txtTodoDesc.Text;
-                todo.Status = GetCurrentTodoStatus();
-                todo.DateToBeCompleted = dateTodoBy.Value;
-                if (_todoManager.Update(todo))
-                {
-                    MessageBox.Show("Student has been modified.", "Information",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close();
-                    _main.LoadTodos();
-                    _main.ResetText();
-                    _main.Visible = true;
-                    this.Dispose();
-
-                }
-                else
-                {
-                    MessageBox.Show("Todo update failed.", "Warning",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
         private void btnAll_Click(object sender, EventArgs e)
         {
             ChangeStatusColor(sender);
@@ -156,5 +102,59 @@ namespace NET7WinFormsWithSqliteTodos.UI
             btn.BackColor = Color.FromName("ControlDark");
         }
 
+        private void btnUpdateTodo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ToDo todo = new ToDo(); //_dbContext.ToDos.FirstOrDefault(t => t.Id == id);
+                if (string.IsNullOrEmpty(txtTodoName.Text))
+                {
+                    MessageBox.Show("Please enter name.", "Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtTodoName.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(txtTodoDesc.Text))
+                {
+                    MessageBox.Show("Please enter todo description.", "Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtTodoDesc.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(dateTodoBy.Value.ToString()))
+                {
+                    MessageBox.Show("Please enter a todo date.", "Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    dateTodoBy.Focus();
+                    return;
+                }
+                todo.Id = Convert.ToInt16(lblId.Text);
+                todo.TodoName = txtTodoName.Text;
+                todo.Description = txtTodoDesc.Text;
+                todo.Status = GetCurrentTodoStatus();
+                todo.DateToBeCompleted = dateTodoBy.Value;
+                if (_todoManager.Update(todo))
+                {
+                    MessageBox.Show("Student has been modified.", "Information",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                    _main.LoadTodos();
+                    _main.ResetText();
+                    _main.Visible = true;
+                    this.Dispose();
+
+                }
+                else
+                {
+                    MessageBox.Show("Todo update failed.", "Warning",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

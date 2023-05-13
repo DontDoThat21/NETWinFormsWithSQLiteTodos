@@ -54,6 +54,7 @@
             txtTodoFilter = new TextBox();
             txtTodoDesc = new TextBox();
             pboxAddNewToDo = new PictureBox();
+            pboxFilterReset = new PictureBox();
             gboxTodos.SuspendLayout();
             pnlToDosBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTodos).BeginInit();
@@ -61,6 +62,7 @@
             pnlToDosMaster.SuspendLayout();
             gboxStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pboxAddNewToDo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pboxFilterReset).BeginInit();
             SuspendLayout();
             // 
             // gboxTodos
@@ -144,6 +146,7 @@
             // pnlToDosMaster
             // 
             pnlToDosMaster.BackColor = SystemColors.ControlLight;
+            pnlToDosMaster.Controls.Add(pboxFilterReset);
             pnlToDosMaster.Controls.Add(dateTodoBy);
             pnlToDosMaster.Controls.Add(lblTodoBy);
             pnlToDosMaster.Controls.Add(lblTodoName);
@@ -285,6 +288,19 @@
             pboxAddNewToDo.Click += pboxAddNewToDo_Click;
             pboxAddNewToDo.MouseHover += pboxAddNewToDo_MouseHover;
             // 
+            // pboxFilterReset
+            // 
+            pboxFilterReset.BackColor = SystemColors.ActiveCaptionText;
+            pboxFilterReset.Image = (Image)resources.GetObject("pboxFilterReset.Image");
+            pboxFilterReset.InitialImage = (Image)resources.GetObject("pboxFilterReset.InitialImage");
+            pboxFilterReset.Location = new Point(386, 73);
+            pboxFilterReset.Name = "pboxFilterReset";
+            pboxFilterReset.Size = new Size(28, 24);
+            pboxFilterReset.SizeMode = PictureBoxSizeMode.StretchImage;
+            pboxFilterReset.TabIndex = 10;
+            pboxFilterReset.TabStop = false;
+            pboxFilterReset.Click += pboxFilterReset_Click;
+            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -304,6 +320,7 @@
             pnlToDosMaster.PerformLayout();
             gboxStatus.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pboxAddNewToDo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pboxFilterReset).EndInit();
             ResumeLayout(false);
         }
 
@@ -333,5 +350,6 @@
         public DataGridView dgvTodos;
         private ContextMenuStrip contextMenuDGVTodos;
         private ToolStripMenuItem deleteToolStripMenuItem;
+        private PictureBox pboxFilterReset;
     }
 }
