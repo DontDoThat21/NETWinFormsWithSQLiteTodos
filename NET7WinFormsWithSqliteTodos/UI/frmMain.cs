@@ -38,7 +38,7 @@ namespace NET7WinFormsWithSqliteTodos.UI
             dgvTodos.Rows.Clear();
             foreach (var todo in todos)
             {
-                dgvTodos.Rows.Add(todo.Id, todo.TodoName, todo.Description, todo.Date);
+                dgvTodos.Rows.Add(todo.Id, todo.TodoName, todo.Description, todo.DateAdded);
             }
         }
 
@@ -88,7 +88,44 @@ namespace NET7WinFormsWithSqliteTodos.UI
         /// <param name="e"></param>
         private void btnAll_Click(object sender, EventArgs e)
         {
+            ChangeStatusColor(sender);
+        }
 
+        private void ChangeStatusColor(object sender)
+        {
+            Button btn = (Button)sender;
+            switch (btn.Text)
+            {
+                case "all":
+                    btnActive.BackColor = Color.FromName("Control");
+                    btnCompleted.BackColor = Color.FromName("Control");
+                    break;
+                case "active":
+                    btnAll.BackColor = Color.FromName("Control");
+                    btnCompleted.BackColor = Color.FromName("Control");
+                    break;
+                case "completed":
+                    btnAll.BackColor = Color.FromName("Control");
+                    btnActive.BackColor = Color.FromName("Control");
+                    break;
+                default:
+                    break;
+            }
+            btn.BackColor = Color.FromName("ControlDark");
+        }
+
+        public string GetActiveButton()
+        {
+            string status = "";
+            foreach (var obj in gboxStatus.Controls)
+            {
+                Button btn = (Button)obj;
+                if (btn.BackColor == Color.FromName("ControlDark"))
+                {
+                    status = btn.Text;
+                }
+            }
+            return status;
         }
 
         /// <summary>
@@ -98,7 +135,7 @@ namespace NET7WinFormsWithSqliteTodos.UI
         /// <param name="e"></param>
         private void btnActive_Click(object sender, EventArgs e)
         {
-
+            ChangeStatusColor(sender);
         }
 
         /// <summary>
@@ -108,7 +145,7 @@ namespace NET7WinFormsWithSqliteTodos.UI
         /// <param name="e"></param>
         private void btnCompleted_Click(object sender, EventArgs e)
         {
-
+            ChangeStatusColor(sender);
         }
 
         /// <summary>
@@ -139,8 +176,15 @@ namespace NET7WinFormsWithSqliteTodos.UI
         private void dgvTodos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow dgvR = dgvTodos.SelectedRows[0];
-            frmTodosDetail frmTodos = new frmTodosDetail();
+            frmTodoDetail frmTodos = new frmTodoDetail();
+
+            frmTodos.lblId.Text = dgvR.Cells[0].Value.ToString();
+            frmTodos.txtTodoName.Text = dgvR.Cells[1].Value.ToString();
+            frmTodos.txtTodoDesc.Text = dgvR.Cells[2].Value.ToString();
+            frmTodos.SetStatusButton(GetActiveButton());
+
             frmTodos.ShowDialog();
+
         }
     }
 }

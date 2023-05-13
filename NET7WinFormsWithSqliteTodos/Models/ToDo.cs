@@ -12,7 +12,7 @@ namespace NET7WinFormsWithSqliteTodos.Models
 
         public ToDo()
         {
-            Date = DateTime.Now;
+            DateAdded = DateTime.Now;
         }
 
         [Key]
@@ -27,6 +27,9 @@ namespace NET7WinFormsWithSqliteTodos.Models
         public string? Status { get; set; }
 
         [Required]        
-        public DateTime Date { get; set; }
+        public DateTime DateToBeCompleted { get; set; }
+
+        [Required]        
+        public DateTime DateAdded { get; set; }
     }
 }
