@@ -182,6 +182,7 @@ namespace NET7WinFormsWithSqliteTodos.UI
             frmTodos.txtTodoName.Text = dgvR.Cells[1].Value.ToString();
             frmTodos.txtTodoDesc.Text = dgvR.Cells[2].Value.ToString();
             frmTodos.SetStatusButton(GetActiveButton());
+            frmTodos.dateTodoBy.Value = dateTodoBy.Value;
 
             frmTodos.ShowDialog();
 

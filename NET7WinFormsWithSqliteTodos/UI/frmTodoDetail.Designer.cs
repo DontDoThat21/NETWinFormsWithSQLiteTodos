@@ -30,6 +30,7 @@
         {
             groupBox1 = new GroupBox();
             pnlToDosMaster = new Panel();
+            button1 = new Button();
             dateTodoBy = new DateTimePicker();
             lblTodoBy = new Label();
             lblId = new Label();
@@ -42,7 +43,6 @@
             btnActive = new Button();
             btnAll = new Button();
             txtTodoDesc = new TextBox();
-            button1 = new Button();
             groupBox1.SuspendLayout();
             pnlToDosMaster.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -75,6 +75,17 @@
             pnlToDosMaster.Name = "pnlToDosMaster";
             pnlToDosMaster.Size = new Size(651, 172);
             pnlToDosMaster.TabIndex = 1;
+            // 
+            // button1
+            // 
+            button1.BackColor = SystemColors.ControlDark;
+            button1.Location = new Point(299, 129);
+            button1.Name = "button1";
+            button1.Size = new Size(336, 37);
+            button1.TabIndex = 12;
+            button1.Text = "SAVE";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += btnSave_Click;
             // 
             // dateTodoBy
             // 
@@ -159,6 +170,7 @@
             btnCompleted.TabIndex = 2;
             btnCompleted.Text = "completed";
             btnCompleted.UseVisualStyleBackColor = false;
+            btnCompleted.Click += btnCompleted_Click;
             // 
             // btnActive
             // 
@@ -169,6 +181,7 @@
             btnActive.TabIndex = 1;
             btnActive.Text = "active";
             btnActive.UseVisualStyleBackColor = false;
+            btnActive.Click += btnActive_Click;
             // 
             // btnAll
             // 
@@ -179,6 +192,7 @@
             btnAll.TabIndex = 0;
             btnAll.Text = "all";
             btnAll.UseVisualStyleBackColor = false;
+            btnAll.Click += btnAll_Click;
             // 
             // txtTodoDesc
             // 
@@ -189,17 +203,6 @@
             txtTodoDesc.TabIndex = 2;
             txtTodoDesc.Text = "todo details here";
             txtTodoDesc.TextAlign = HorizontalAlignment.Center;
-            // 
-            // button1
-            // 
-            button1.BackColor = SystemColors.ControlDark;
-            button1.Location = new Point(299, 129);
-            button1.Name = "button1";
-            button1.Size = new Size(336, 37);
-            button1.TabIndex = 12;
-            button1.Text = "SAVE";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += btnSave_Click;
             // 
             // frmTodoDetail
             // 
@@ -229,8 +232,8 @@
         public Button btnActive;
         public Button btnAll;
         public GroupBox groupBox1;
-        private DateTimePicker dateTodoBy;
         private Label lblTodoBy;
         private Button button1;
+        public DateTimePicker dateTodoBy;
     }
 }

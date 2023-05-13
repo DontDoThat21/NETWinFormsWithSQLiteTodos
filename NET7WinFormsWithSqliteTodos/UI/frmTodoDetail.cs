@@ -47,5 +47,42 @@ namespace NET7WinFormsWithSqliteTodos.UI
         {
 
         }
+        private void btnAll_Click(object sender, EventArgs e)
+        {
+            ChangeStatusColor(sender);
+        }
+
+        private void btnActive_Click(object sender, EventArgs e)
+        {
+            ChangeStatusColor(sender);
+        }
+        private void btnCompleted_Click(object sender, EventArgs e)
+        {
+            ChangeStatusColor(sender);
+        }
+
+        private void ChangeStatusColor(object sender)
+        {
+            Button btn = (Button)sender;
+            switch (btn.Text)
+            {
+                case "all":
+                    btnActive.BackColor = Color.FromName("Control");
+                    btnCompleted.BackColor = Color.FromName("Control");
+                    break;
+                case "active":
+                    btnAll.BackColor = Color.FromName("Control");
+                    btnCompleted.BackColor = Color.FromName("Control");
+                    break;
+                case "completed":
+                    btnAll.BackColor = Color.FromName("Control");
+                    btnActive.BackColor = Color.FromName("Control");
+                    break;
+                default:
+                    break;
+            }
+            btn.BackColor = Color.FromName("ControlDark");
+        }
+
     }
 }
