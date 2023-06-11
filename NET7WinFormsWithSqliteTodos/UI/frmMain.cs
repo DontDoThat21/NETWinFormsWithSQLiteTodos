@@ -3,6 +3,7 @@ using Microsoft.VisualBasic.ApplicationServices;
 using NET7WinFormsWithSqliteTodos.Data;
 using NET7WinFormsWithSqliteTodos.Models;
 using NET7WinFormsWithSqliteTodos.Properties;
+using System.Data;
 
 namespace NET7WinFormsWithSqliteTodos.UI
 {
@@ -221,9 +222,6 @@ namespace NET7WinFormsWithSqliteTodos.UI
             BindingSource bs = new BindingSource();
             bs.DataSource = dgvTodos.DataSource;
             bs.Filter += dgvTodos.Columns[1].HeaderText.ToString() + " LIKE '%" + txtTodoFilter.Text + "%'";
-            bs.Filter += dgvTodos.Columns[2].HeaderText.ToString() + " LIKE '%" + txtTodoFilter.Text + "%'";
-            bs.Filter += dgvTodos.Columns[3].HeaderText.ToString() + " LIKE '%" + txtTodoFilter.Text + "%'";
-            bs.Filter += dgvTodos.Columns[4].HeaderText.ToString() + " LIKE '%" + txtTodoFilter.Text + "%'";
 
             dgvTodos.DataSource = bs;
 
