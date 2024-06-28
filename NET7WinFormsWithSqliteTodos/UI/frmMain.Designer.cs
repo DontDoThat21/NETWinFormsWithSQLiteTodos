@@ -234,7 +234,7 @@
             pboxFilterReset.BackColor = SystemColors.ActiveCaptionText;
             pboxFilterReset.Image = (Image)resources.GetObject("pboxFilterReset.Image");
             pboxFilterReset.InitialImage = (Image)resources.GetObject("pboxFilterReset.InitialImage");
-            pboxFilterReset.Location = new Point(386, 73);
+            pboxFilterReset.Location = new Point(386, 69);
             pboxFilterReset.Name = "pboxFilterReset";
             pboxFilterReset.Size = new Size(28, 24);
             pboxFilterReset.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -246,7 +246,7 @@
             // 
             dateTodoBy.CalendarMonthBackground = SystemColors.GrayText;
             dateTodoBy.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dateTodoBy.Location = new Point(68, 108);
+            dateTodoBy.Location = new Point(68, 106);
             dateTodoBy.Name = "dateTodoBy";
             dateTodoBy.Size = new Size(200, 22);
             dateTodoBy.TabIndex = 9;
@@ -257,7 +257,7 @@
             lblTodoBy.AutoSize = true;
             lblTodoBy.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             lblTodoBy.ForeColor = Color.GhostWhite;
-            lblTodoBy.Location = new Point(3, 112);
+            lblTodoBy.Location = new Point(3, 110);
             lblTodoBy.Name = "lblTodoBy";
             lblTodoBy.Size = new Size(51, 13);
             lblTodoBy.TabIndex = 8;
@@ -303,7 +303,7 @@
             txtTodoFilter.BackColor = SystemColors.ControlDarkDark;
             txtTodoFilter.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             txtTodoFilter.ForeColor = Color.GhostWhite;
-            txtTodoFilter.Location = new Point(15, 73);
+            txtTodoFilter.Location = new Point(15, 69);
             txtTodoFilter.Name = "txtTodoFilter";
             txtTodoFilter.Size = new Size(399, 22);
             txtTodoFilter.TabIndex = 3;
