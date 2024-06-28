@@ -42,34 +42,37 @@
             contextMenuDGVTodos = new ContextMenuStrip(components);
             deleteToolStripMenuItem = new ToolStripMenuItem();
             pnlToDosMaster = new Panel();
+            pnlStatus = new Panel();
+            lblSelectStatus = new Label();
+            btnNew = new Button();
+            btnCompleted = new Button();
+            btnActive = new Button();
+            pboxFilterReset = new PictureBox();
             dateTodoBy = new DateTimePicker();
             lblTodoBy = new Label();
             lblTodoName = new Label();
             label1 = new Label();
             txtTodoName = new TextBox();
-            gboxStatus = new GroupBox();
-            btnCompleted = new Button();
-            btnActive = new Button();
-            btnAll = new Button();
             txtTodoFilter = new TextBox();
             txtTodoDesc = new TextBox();
             pboxAddNewToDo = new PictureBox();
-            pboxFilterReset = new PictureBox();
             gboxTodos.SuspendLayout();
             pnlToDosBody.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTodos).BeginInit();
             contextMenuDGVTodos.SuspendLayout();
             pnlToDosMaster.SuspendLayout();
-            gboxStatus.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pboxAddNewToDo).BeginInit();
+            pnlStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pboxFilterReset).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pboxAddNewToDo).BeginInit();
             SuspendLayout();
             // 
             // gboxTodos
             // 
+            gboxTodos.BackColor = Color.LightSlateGray;
             gboxTodos.Controls.Add(pnlToDosBody);
             gboxTodos.Controls.Add(pnlToDosMaster);
             gboxTodos.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            gboxTodos.ForeColor = Color.Cyan;
             gboxTodos.Location = new Point(12, 14);
             gboxTodos.Name = "gboxTodos";
             gboxTodos.Size = new Size(776, 483);
@@ -80,6 +83,8 @@
             // pnlToDosBody
             // 
             pnlToDosBody.Controls.Add(dgvTodos);
+            pnlToDosBody.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            pnlToDosBody.ForeColor = Color.DarkCyan;
             pnlToDosBody.Location = new Point(6, 175);
             pnlToDosBody.Name = "pnlToDosBody";
             pnlToDosBody.Size = new Size(764, 302);
@@ -88,6 +93,7 @@
             // dgvTodos
             // 
             dgvTodos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvTodos.BackgroundColor = Color.LightSlateGray;
             dgvTodos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTodos.Columns.AddRange(new DataGridViewColumn[] { Id, TodoName, Description, Status, CompleteBy, DateTime });
             dgvTodos.ContextMenuStrip = contextMenuDGVTodos;
@@ -145,14 +151,14 @@
             // 
             // pnlToDosMaster
             // 
-            pnlToDosMaster.BackColor = SystemColors.ControlLight;
+            pnlToDosMaster.BackColor = Color.LightSlateGray;
+            pnlToDosMaster.Controls.Add(pnlStatus);
             pnlToDosMaster.Controls.Add(pboxFilterReset);
             pnlToDosMaster.Controls.Add(dateTodoBy);
             pnlToDosMaster.Controls.Add(lblTodoBy);
             pnlToDosMaster.Controls.Add(lblTodoName);
             pnlToDosMaster.Controls.Add(label1);
             pnlToDosMaster.Controls.Add(txtTodoName);
-            pnlToDosMaster.Controls.Add(gboxStatus);
             pnlToDosMaster.Controls.Add(txtTodoFilter);
             pnlToDosMaster.Controls.Add(txtTodoDesc);
             pnlToDosMaster.Controls.Add(pboxAddNewToDo);
@@ -161,70 +167,50 @@
             pnlToDosMaster.Size = new Size(764, 144);
             pnlToDosMaster.TabIndex = 0;
             // 
-            // dateTodoBy
+            // pnlStatus
             // 
-            dateTodoBy.Location = new Point(68, 108);
-            dateTodoBy.Name = "dateTodoBy";
-            dateTodoBy.Size = new Size(200, 24);
-            dateTodoBy.TabIndex = 9;
-            dateTodoBy.Value = new DateTime(2023, 6, 21, 0, 0, 0, 0);
+            pnlStatus.BackColor = Color.FromArgb(150, 150, 150);
+            pnlStatus.Controls.Add(lblSelectStatus);
+            pnlStatus.Controls.Add(btnNew);
+            pnlStatus.Controls.Add(btnCompleted);
+            pnlStatus.Controls.Add(btnActive);
+            pnlStatus.Location = new Point(432, 62);
+            pnlStatus.Name = "pnlStatus";
+            pnlStatus.Size = new Size(208, 63);
+            pnlStatus.TabIndex = 11;
             // 
-            // lblTodoBy
+            // lblSelectStatus
             // 
-            lblTodoBy.AutoSize = true;
-            lblTodoBy.Location = new Point(3, 112);
-            lblTodoBy.Name = "lblTodoBy";
-            lblTodoBy.Size = new Size(59, 17);
-            lblTodoBy.TabIndex = 8;
-            lblTodoBy.Text = "ToDo By:";
+            lblSelectStatus.AutoSize = true;
+            lblSelectStatus.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblSelectStatus.ForeColor = Color.GhostWhite;
+            lblSelectStatus.Location = new Point(68, 4);
+            lblSelectStatus.Name = "lblSelectStatus";
+            lblSelectStatus.Size = new Size(72, 13);
+            lblSelectStatus.TabIndex = 3;
+            lblSelectStatus.Text = "Select Status";
             // 
-            // lblTodoName
+            // btnNew
             // 
-            lblTodoName.AutoSize = true;
-            lblTodoName.Location = new Point(65, 6);
-            lblTodoName.Name = "lblTodoName";
-            lblTodoName.Size = new Size(75, 17);
-            lblTodoName.TabIndex = 5;
-            lblTodoName.Text = "ToDo Name:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 33);
-            label1.Name = "label1";
-            label1.Size = new Size(110, 17);
-            label1.TabIndex = 7;
-            label1.Text = "ToDo Description:";
-            // 
-            // txtTodoName
-            // 
-            txtTodoName.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTodoName.Location = new Point(146, 3);
-            txtTodoName.Name = "txtTodoName";
-            txtTodoName.Size = new Size(392, 24);
-            txtTodoName.TabIndex = 6;
-            txtTodoName.Text = "todo name here";
-            txtTodoName.TextAlign = HorizontalAlignment.Center;
-            txtTodoName.TextChanged += txtTodoName_TextChanged;
-            // 
-            // gboxStatus
-            // 
-            gboxStatus.Controls.Add(btnCompleted);
-            gboxStatus.Controls.Add(btnActive);
-            gboxStatus.Controls.Add(btnAll);
-            gboxStatus.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            gboxStatus.Location = new Point(420, 55);
-            gboxStatus.Name = "gboxStatus";
-            gboxStatus.Size = new Size(210, 61);
-            gboxStatus.TabIndex = 4;
-            gboxStatus.TabStop = false;
+            btnNew.BackColor = SystemColors.ControlDarkDark;
+            btnNew.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnNew.ForeColor = Color.GhostWhite;
+            btnNew.Location = new Point(5, 20);
+            btnNew.Name = "btnNew";
+            btnNew.Size = new Size(41, 39);
+            btnNew.TabIndex = 0;
+            btnNew.Text = "new";
+            btnNew.UseVisualStyleBackColor = false;
+            btnNew.Click += btnAll_Click;
             // 
             // btnCompleted
             // 
-            btnCompleted.BackColor = SystemColors.Control;
-            btnCompleted.Location = new Point(124, 10);
+            btnCompleted.BackColor = SystemColors.ControlDarkDark;
+            btnCompleted.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnCompleted.ForeColor = Color.GhostWhite;
+            btnCompleted.Location = new Point(123, 20);
             btnCompleted.Name = "btnCompleted";
-            btnCompleted.Size = new Size(80, 48);
+            btnCompleted.Size = new Size(80, 39);
             btnCompleted.TabIndex = 2;
             btnCompleted.Text = "completed";
             btnCompleted.UseVisualStyleBackColor = false;
@@ -232,32 +218,94 @@
             // 
             // btnActive
             // 
-            btnActive.BackColor = SystemColors.Control;
-            btnActive.Location = new Point(53, 10);
+            btnActive.BackColor = SystemColors.ControlDarkDark;
+            btnActive.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnActive.ForeColor = Color.GhostWhite;
+            btnActive.Location = new Point(52, 20);
             btnActive.Name = "btnActive";
-            btnActive.Size = new Size(65, 48);
+            btnActive.Size = new Size(65, 39);
             btnActive.TabIndex = 1;
-            btnActive.Text = "active";
+            btnActive.Text = "work in progress";
             btnActive.UseVisualStyleBackColor = false;
             btnActive.Click += btnActive_Click;
             // 
-            // btnAll
+            // pboxFilterReset
             // 
-            btnAll.BackColor = SystemColors.Control;
-            btnAll.Location = new Point(6, 10);
-            btnAll.Name = "btnAll";
-            btnAll.Size = new Size(41, 48);
-            btnAll.TabIndex = 0;
-            btnAll.Text = "all";
-            btnAll.UseVisualStyleBackColor = false;
-            btnAll.Click += btnAll_Click;
+            pboxFilterReset.BackColor = SystemColors.ActiveCaptionText;
+            pboxFilterReset.Image = (Image)resources.GetObject("pboxFilterReset.Image");
+            pboxFilterReset.InitialImage = (Image)resources.GetObject("pboxFilterReset.InitialImage");
+            pboxFilterReset.Location = new Point(386, 73);
+            pboxFilterReset.Name = "pboxFilterReset";
+            pboxFilterReset.Size = new Size(28, 24);
+            pboxFilterReset.SizeMode = PictureBoxSizeMode.StretchImage;
+            pboxFilterReset.TabIndex = 10;
+            pboxFilterReset.TabStop = false;
+            pboxFilterReset.Click += pboxFilterReset_Click;
+            // 
+            // dateTodoBy
+            // 
+            dateTodoBy.CalendarMonthBackground = SystemColors.GrayText;
+            dateTodoBy.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTodoBy.Location = new Point(68, 108);
+            dateTodoBy.Name = "dateTodoBy";
+            dateTodoBy.Size = new Size(200, 22);
+            dateTodoBy.TabIndex = 9;
+            dateTodoBy.Value = new DateTime(2023, 6, 21, 0, 0, 0, 0);
+            // 
+            // lblTodoBy
+            // 
+            lblTodoBy.AutoSize = true;
+            lblTodoBy.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTodoBy.ForeColor = Color.GhostWhite;
+            lblTodoBy.Location = new Point(3, 112);
+            lblTodoBy.Name = "lblTodoBy";
+            lblTodoBy.Size = new Size(51, 13);
+            lblTodoBy.TabIndex = 8;
+            lblTodoBy.Text = "ToDo By:";
+            // 
+            // lblTodoName
+            // 
+            lblTodoName.AutoSize = true;
+            lblTodoName.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTodoName.ForeColor = Color.GhostWhite;
+            lblTodoName.Location = new Point(65, 6);
+            lblTodoName.Name = "lblTodoName";
+            lblTodoName.Size = new Size(69, 13);
+            lblTodoName.TabIndex = 5;
+            lblTodoName.Text = "ToDo Name:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = Color.GhostWhite;
+            label1.Location = new Point(3, 33);
+            label1.Name = "label1";
+            label1.Size = new Size(99, 13);
+            label1.TabIndex = 7;
+            label1.Text = "ToDo Description:";
+            // 
+            // txtTodoName
+            // 
+            txtTodoName.BackColor = SystemColors.ControlDarkDark;
+            txtTodoName.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtTodoName.ForeColor = Color.GhostWhite;
+            txtTodoName.Location = new Point(146, 3);
+            txtTodoName.Name = "txtTodoName";
+            txtTodoName.Size = new Size(392, 22);
+            txtTodoName.TabIndex = 6;
+            txtTodoName.Text = "todo name here";
+            txtTodoName.TextAlign = HorizontalAlignment.Center;
+            txtTodoName.TextChanged += txtTodoName_TextChanged;
             // 
             // txtTodoFilter
             // 
-            txtTodoFilter.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtTodoFilter.BackColor = SystemColors.ControlDarkDark;
+            txtTodoFilter.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtTodoFilter.ForeColor = Color.GhostWhite;
             txtTodoFilter.Location = new Point(15, 73);
             txtTodoFilter.Name = "txtTodoFilter";
-            txtTodoFilter.Size = new Size(399, 24);
+            txtTodoFilter.Size = new Size(399, 22);
             txtTodoFilter.TabIndex = 3;
             txtTodoFilter.Text = "type search filter here";
             txtTodoFilter.TextAlign = HorizontalAlignment.Center;
@@ -265,10 +313,12 @@
             // 
             // txtTodoDesc
             // 
-            txtTodoDesc.Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtTodoDesc.BackColor = SystemColors.ControlDarkDark;
+            txtTodoDesc.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtTodoDesc.ForeColor = Color.GhostWhite;
             txtTodoDesc.Location = new Point(116, 31);
             txtTodoDesc.Name = "txtTodoDesc";
-            txtTodoDesc.Size = new Size(525, 24);
+            txtTodoDesc.Size = new Size(525, 22);
             txtTodoDesc.TabIndex = 2;
             txtTodoDesc.Text = "todo details here";
             txtTodoDesc.TextAlign = HorizontalAlignment.Center;
@@ -288,23 +338,11 @@
             pboxAddNewToDo.Click += pboxAddNewToDo_Click;
             pboxAddNewToDo.MouseHover += pboxAddNewToDo_MouseHover;
             // 
-            // pboxFilterReset
-            // 
-            pboxFilterReset.BackColor = SystemColors.ActiveCaptionText;
-            pboxFilterReset.Image = (Image)resources.GetObject("pboxFilterReset.Image");
-            pboxFilterReset.InitialImage = (Image)resources.GetObject("pboxFilterReset.InitialImage");
-            pboxFilterReset.Location = new Point(386, 73);
-            pboxFilterReset.Name = "pboxFilterReset";
-            pboxFilterReset.Size = new Size(28, 24);
-            pboxFilterReset.SizeMode = PictureBoxSizeMode.StretchImage;
-            pboxFilterReset.TabIndex = 10;
-            pboxFilterReset.TabStop = false;
-            pboxFilterReset.Click += pboxFilterReset_Click;
-            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.SlateGray;
             ClientSize = new Size(800, 510);
             Controls.Add(gboxTodos);
             Font = new Font("Comic Sans MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -318,9 +356,10 @@
             contextMenuDGVTodos.ResumeLayout(false);
             pnlToDosMaster.ResumeLayout(false);
             pnlToDosMaster.PerformLayout();
-            gboxStatus.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pboxAddNewToDo).EndInit();
+            pnlStatus.ResumeLayout(false);
+            pnlStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pboxFilterReset).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pboxAddNewToDo).EndInit();
             ResumeLayout(false);
         }
 
@@ -330,10 +369,9 @@
         private Panel pnlToDosMaster;
         private TextBox txtTodoDesc;
         private TextBox txtTodoFilter;
-        private GroupBox gboxStatus;
         private Button btnCompleted;
         private Button btnActive;
-        private Button btnAll;
+        private Button btnNew;
         private Panel pnlToDosBody;
         private PictureBox pboxAddNewToDo;
         private Label label1;
@@ -351,5 +389,7 @@
         private ContextMenuStrip contextMenuDGVTodos;
         private ToolStripMenuItem deleteToolStripMenuItem;
         private PictureBox pboxFilterReset;
+        private Panel pnlStatus;
+        private Label lblSelectStatus;
     }
 }

@@ -163,11 +163,11 @@ namespace NETWinFormsWithSqliteTodos.UI
                     btnCompleted.BackColor = Color.FromName("Control");
                     break;
                 case "active":
-                    btnAll.BackColor = Color.FromName("Control");
+                    btnNew.BackColor = Color.FromName("Control");
                     btnCompleted.BackColor = Color.FromName("Control");
                     break;
                 case "completed":
-                    btnAll.BackColor = Color.FromName("Control");
+                    btnNew.BackColor = Color.FromName("Control");
                     btnActive.BackColor = Color.FromName("Control");
                     break;
                 default:
@@ -179,7 +179,7 @@ namespace NETWinFormsWithSqliteTodos.UI
         public string GetCurrentTodoStatus()
         {
             string status = "";
-            foreach (var obj in gboxStatus.Controls)
+            foreach (var obj in pnlStatus.Controls)
             {
                 Button btn = (Button)obj;
                 if (btn.BackColor == Color.FromName("ControlDark"))
@@ -232,7 +232,7 @@ namespace NETWinFormsWithSqliteTodos.UI
         {
             bool isValid = true;
             if (btnActive.BackColor == Color.FromName("ControlDark") ||
-                btnAll.BackColor == Color.FromName("ControlDark") ||
+                btnNew.BackColor == Color.FromName("ControlDark") ||
                 btnCompleted.BackColor == Color.FromName("ControlDark")
                )
             {
@@ -313,15 +313,15 @@ namespace NETWinFormsWithSqliteTodos.UI
                 case "all":
                     btnActive.BackColor = Color.FromName("Control");
                     btnCompleted.BackColor = Color.FromName("Control");
-                    btn = btnAll;
+                    btn = btnNew;
                     break;
                 case "active":
-                    btnAll.BackColor = Color.FromName("Control");
+                    btnNew.BackColor = Color.FromName("Control");
                     btnCompleted.BackColor = Color.FromName("Control");
                     btn = btnActive;
                     break;
                 case "completed":
-                    btnAll.BackColor = Color.FromName("Control");
+                    btnNew.BackColor = Color.FromName("Control");
                     btnActive.BackColor = Color.FromName("Control");
                     btn = btnCompleted;
                     break;
