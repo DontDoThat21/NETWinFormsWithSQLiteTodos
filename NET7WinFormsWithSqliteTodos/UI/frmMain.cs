@@ -1,11 +1,11 @@
 ﻿
 using Microsoft.VisualBasic.ApplicationServices;
-using NET7WinFormsWithSqliteTodos.Data;
-using NET7WinFormsWithSqliteTodos.Models;
-using NET7WinFormsWithSqliteTodos.Properties;
+using NETWinFormsWithSqliteTodos.Data;
+using NETWinFormsWithSqliteTodos.Models;
+using NETWinFormsWithSqliteTodos.Properties;
 using System.Data;
 
-namespace NET7WinFormsWithSqliteTodos.UI
+namespace NETWinFormsWithSqliteTodos.UI
 {
     public partial class frmMain : Form
     {

@@ -1,5 +1,5 @@
-﻿using NET7WinFormsWithSqliteTodos.Data;
-using NET7WinFormsWithSqliteTodos.Models;
+﻿using NETWinFormsWithSqliteTodos.Data;
+using NETWinFormsWithSqliteTodos.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NET7WinFormsWithSqliteTodos.UI
+namespace NETWinFormsWithSqliteTodos.UI
 {
     public partial class frmTodoDetail : Form
     {

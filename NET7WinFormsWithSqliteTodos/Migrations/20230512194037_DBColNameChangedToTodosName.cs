@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace NET7WinFormsWithSqliteTodos.Migrations
+namespace NETWinFormsWithSqliteTodos.Migrations
 {
     /// <inheritdoc />
     public partial class DBColNameChangedToTodosName : Migration

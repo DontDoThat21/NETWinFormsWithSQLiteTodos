@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NET7WinFormsWithSqliteTodos.Models
+namespace NETWinFormsWithSqliteTodos.Models
 {
     public class ToDo
     {

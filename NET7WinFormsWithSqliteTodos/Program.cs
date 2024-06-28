@@ -1,6 +1,6 @@
-using NET7WinFormsWithSqliteTodos.UI;
+using NETWinFormsWithSqliteTodos.UI;
 
-namespace NET7WinFormsWithSqliteTodos
+namespace NETWinFormsWithSqliteTodos
 {
     internal static class Program
     {

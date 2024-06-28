@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <StartupObject>NET7WinFormsWithSqliteTodos.Program</StartupObject>
+    <StartupObject>NETWinFormsWithSqliteTodos.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

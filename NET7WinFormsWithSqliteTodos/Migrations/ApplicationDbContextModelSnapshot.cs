@@ -3,11 +3,11 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NET7WinFormsWithSqliteTodos.Data;
+using NETWinFormsWithSqliteTodos.Data;
 
 #nullable disable
 
-namespace NET7WinFormsWithSqliteTodos.Migrations
+namespace NETWinFormsWithSqliteTodos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,7 @@ namespace NET7WinFormsWithSqliteTodos.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0-preview.3.23174.2");
 
-            modelBuilder.Entity("NET7WinFormsWithSqliteTodos.Models.ToDo", b =>
+            modelBuilder.Entity("NETWinFormsWithSqliteTodos.Models.ToDo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

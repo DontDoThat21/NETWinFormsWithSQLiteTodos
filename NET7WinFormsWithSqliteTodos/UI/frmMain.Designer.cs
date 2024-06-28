@@ -1,4 +1,4 @@
-﻿namespace NET7WinFormsWithSqliteTodos.UI
+﻿namespace NETWinFormsWithSqliteTodos.UI
 {
     partial class frmMain
     {

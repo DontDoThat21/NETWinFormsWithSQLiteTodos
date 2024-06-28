@@ -1,11 +1,11 @@
-﻿using NET7WinFormsWithSqliteTodos.Models;
+﻿using NETWinFormsWithSqliteTodos.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NET7WinFormsWithSqliteTodos.Data
+namespace NETWinFormsWithSqliteTodos.Data
 {
     public class TodosManager
     {

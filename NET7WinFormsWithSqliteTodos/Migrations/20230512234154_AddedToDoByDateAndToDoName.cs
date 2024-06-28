@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace NET7WinFormsWithSqliteTodos.Migrations
+namespace NETWinFormsWithSqliteTodos.Migrations
 {
     /// <inheritdoc />
     public partial class AddedToDoByDateAndToDoName : Migration
