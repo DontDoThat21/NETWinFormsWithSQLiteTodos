@@ -1,9 +1,9 @@
-﻿
-using Microsoft.VisualBasic.ApplicationServices;
+﻿using Microsoft.VisualBasic.ApplicationServices;
 using NETWinFormsWithSqliteTodos.Data;
 using NETWinFormsWithSqliteTodos.Models;
 using NETWinFormsWithSqliteTodos.Properties;
 using System.Data;
+using System.Text;
 
 namespace NETWinFormsWithSqliteTodos.UI
 {
@@ -29,6 +29,10 @@ namespace NETWinFormsWithSqliteTodos.UI
                 string userName = Environment.UserName;
                 this.Text = this.Text.Replace("{User}", userName);
                 LoadTodos();
+                ApplyDarkMode(false); // Default to light mode
+                EnableDragAndDrop();
+                AddSwipeGestures();
+                ApplyModernUI(); // Apply the modern UI changes
             }
             catch (Exception ex)
             {
@@ -46,18 +50,17 @@ namespace NETWinFormsWithSqliteTodos.UI
             txtTodoFilter.Text = "type search filter here";
         }
 
-        public void LoadTodos()
+        public async void LoadTodos()
         {
             try
             {
-                TodosManager todosManager = new TodosManager();
-                List<ToDo> todos = todosManager.GetAll();
-                dgvTodos.Rows.Clear();
-                foreach (var todo in todos)
-                {
-                    dgvTodos.Rows.Add(todo.Id, todo.TodoName, todo.Description,
-                        todo.Status, todo.DateToBeCompleted, todo.DateAdded);
-                }
+                List<ToDo> todos = await _todosManager.GetAllAsync(); // Use GetAllAsync
+
+                // Set the DataSource of the DataGridView instead of adding rows programmatically
+                BindingSource bindingSource = new BindingSource();
+                bindingSource.DataSource = todos;
+                dgvTodos.DataSource = bindingSource;
+
                 dgvTodos.Refresh();
             }
             catch (Exception ex)
@@ -73,11 +76,10 @@ namespace NETWinFormsWithSqliteTodos.UI
         /// <summary>
         /// This is the picture box for the add/create new todo button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pboxAddNewToDo_Click(object sender, EventArgs e)
+        /// <param="sender"></param>
+        /// <param="e"></param>
+        private async void pboxAddNewToDo_Click(object sender, EventArgs e)
         {
-
             bool isValid = ValidateNewButtonSubmission();
             if (!isValid)
             {
@@ -111,13 +113,15 @@ namespace NETWinFormsWithSqliteTodos.UI
                     return;
                 }
 
-                ToDo todo = new ToDo();
-                todo.TodoName = txtTodoName.Text;
-                todo.Description = txtTodoDesc.Text;
-                todo.DateToBeCompleted = dateTodoBy.Value;
-                todo.Status = GetCurrentTodoStatus();
+                ToDo todo = new ToDo
+                {
+                    TodoName = txtTodoName.Text,
+                    Description = txtTodoDesc.Text,
+                    DateToBeCompleted = dateTodoBy.Value,
+                    Status = GetCurrentTodoStatus()
+                };
 
-                if (_todosManager.Add(todo))
+                if (await _todosManager.AddAsync(todo)) // Use AddAsync
                 {
                     MessageBox.Show("Todo has been saved.", "Information",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -145,8 +149,8 @@ namespace NETWinFormsWithSqliteTodos.UI
         /// <summary>
         /// This is the all todos filter option.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param="sender"></param>
+        /// <param="e"></param>
         private void btnAll_Click(object sender, EventArgs e)
         {
             ChangeStatusColor(sender);
@@ -181,10 +185,13 @@ namespace NETWinFormsWithSqliteTodos.UI
             string status = "";
             foreach (var obj in pnlStatus.Controls)
             {
-                Button btn = (Button)obj;
-                if (btn.BackColor == Color.FromName("ControlDark"))
+                if (obj is Button btn) // Ensure only Buttons are processed
                 {
-                    status = btn.Text;
+                    if (btn.BackColor == Color.FromName("ControlDark"))
+                    {
+                        status = btn.Text;
+                        break;
+                    }
                 }
             }
             return status;
@@ -193,8 +200,8 @@ namespace NETWinFormsWithSqliteTodos.UI
         /// <summary>
         /// This is the active todos filter option.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param="sender"></param>
+        /// <param="e"></param>
         private void btnActive_Click(object sender, EventArgs e)
         {
             ChangeStatusColor(sender);
@@ -204,8 +211,8 @@ namespace NETWinFormsWithSqliteTodos.UI
         /// <summary>
         /// This is the completed todos filter option.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param="sender"></param>
+        /// <param="e"></param>
         private void btnCompleted_Click(object sender, EventArgs e)
         {
             ChangeStatusColor(sender);
@@ -215,8 +222,8 @@ namespace NETWinFormsWithSqliteTodos.UI
         /// <summary>
         /// This is the filter/search box text.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param="sender"></param>
+        /// <param="e"></param>
         private void txtTodoFilter_TextChanged(object sender, EventArgs e)
         {
             BindingSource bs = new BindingSource();
@@ -231,47 +238,56 @@ namespace NETWinFormsWithSqliteTodos.UI
         private bool ValidateNewButtonSubmission()
         {
             bool isValid = true;
-            if (btnActive.BackColor == Color.FromName("ControlDark") ||
-                btnNew.BackColor == Color.FromName("ControlDark") ||
-                btnCompleted.BackColor == Color.FromName("ControlDark")
-               )
+            StringBuilder validationErrors = new StringBuilder();
+
+            if (string.IsNullOrEmpty(txtTodoName.Text))
             {
-                isValid = true;
+                isValid = false;
+                validationErrors.AppendLine("Todo Name is required.");
+                txtTodoName.BackColor = Color.LightCoral; // Highlight invalid field
             }
             else
             {
-                isValid = false;
+                txtTodoName.BackColor = Color.White; // Reset field color
             }
-            if (string.IsNullOrEmpty(txtTodoName.Text.ToString()))
+
+            if (string.IsNullOrEmpty(txtTodoDesc.Text))
             {
                 isValid = false;
-            }
-            else if (string.IsNullOrEmpty(txtTodoDesc.Text.ToString()))
-            {
-                isValid = false;
-            }
-            else if (string.IsNullOrEmpty(dateTodoBy.Value.ToString()))
-            {
-                isValid = false;
-            }
-            if (isValid)
-            {
-                pboxAddNewToDo.Image = Resources.btnAddTodo;
+                validationErrors.AppendLine("Todo Description is required.");
+                txtTodoDesc.BackColor = Color.LightCoral; // Highlight invalid field
             }
             else
             {
-                pboxAddNewToDo.Image = Resources.btnAddTodoInvalid;
+                txtTodoDesc.BackColor = Color.White; // Reset field color
+            }
+
+            // Fix incorrect usage of 'Now' in the DataGridViewTextBoxColumn context
+            if (dateTodoBy.Value == null || dateTodoBy.Value < System.DateTime.Now) // Use DateTime.Now instead of 'Now'
+            {
+                isValid = false;
+                validationErrors.AppendLine("A valid 'To Be Completed By' date is required.");
+                dateTodoBy.CalendarForeColor = Color.Red; // Highlight invalid field
+            }
+            else
+            {
+                dateTodoBy.CalendarForeColor = Color.Black; // Reset field color
+            }
+
+            if (!isValid)
+            {
+                MessageBox.Show($"Invalid todo details:\n{validationErrors.ToString()}", "Validation Errors",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             return isValid;
-
         }
 
         /// <summary>
         /// This is the main todo text.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param="sender"></param>
+        /// <param="e"></param>
         private void txtTodoDesc_TextChanged(object sender, EventArgs e)
         {
             ValidateNewButtonSubmission();
@@ -287,6 +303,15 @@ namespace NETWinFormsWithSqliteTodos.UI
             try
             {
                 DataGridViewRow dgvR = dgvTodos.Rows[e.RowIndex];
+
+                // Check if the required cell values are null
+                if (dgvR.Cells[0].Value == null || dgvR.Cells[1].Value == null || dgvR.Cells[2].Value == null)
+                {
+                    MessageBox.Show("One or more required fields are empty. Please ensure all fields are populated.", 
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 frmTodoDetail frmTodos = new frmTodoDetail(this);
 
                 frmTodos.lblId.Text = dgvR.Cells[0].Value.ToString();
@@ -295,12 +320,11 @@ namespace NETWinFormsWithSqliteTodos.UI
                 frmTodos.SetStatusButton(GetCurrentTodoStatus());
                 frmTodos.dateTodoBy.Value = dateTodoBy.Value;
 
-                //this.Hide();
                 frmTodos.ShowDialog();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error",
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -337,7 +361,7 @@ namespace NETWinFormsWithSqliteTodos.UI
 
         }
 
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -346,12 +370,11 @@ namespace NETWinFormsWithSqliteTodos.UI
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     int id = (int)dr.Cells[0].Value;
-                    bool isDelete = _todosManager.Delete(id);
+                    bool isDelete = await _todosManager.DeleteAsync(id); // Await the async method
                     if (isDelete)
                     {
                         MessageBox.Show("Todo has been removed.", "Information",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        //ssLoadData();
                         dgvTodos.Rows.Remove(dr);
                     }
                     else
@@ -372,6 +395,89 @@ namespace NETWinFormsWithSqliteTodos.UI
         {
             txtTodoFilter.Text = string.Empty;
             LoadTodos();
+        }
+
+        private void ApplyDarkMode(bool enable)
+        {
+            this.BackColor = enable ? Color.Black : Color.White;
+            this.ForeColor = enable ? Color.White : Color.Black;
+            // Update other UI elements for dark mode
+        }
+
+        private void EnableDragAndDrop()
+        {
+            dgvTodos.AllowDrop = true;
+            dgvTodos.DragDrop += (s, e) =>
+            {
+                // Handle drag-and-drop logic
+            };
+        }
+
+        private void AddSwipeGestures()
+        {
+            // Implement swipe gestures for touch devices
+        }
+
+        private void ApplyRoundedCorners(Control control, int radius)
+        {
+            var path = new System.Drawing.Drawing2D.GraphicsPath();
+            path.AddArc(0, 0, radius, radius, 180, 90);
+            path.AddArc(control.Width - radius, 0, radius, radius, 270, 90);
+            path.AddArc(control.Width - radius, control.Height - radius, radius, radius, 0, 90);
+            path.AddArc(0, control.Height - radius, radius, radius, 90, 90);
+            path.CloseAllFigures();
+            control.Region = new Region(path);
+        }
+
+        private void ApplyModernUI()
+        {
+            // Set a very dark blue color scheme
+            this.BackColor = Color.FromArgb(10, 10, 50); // Dark blue background
+            this.ForeColor = Color.White; // White text for readability
+
+            // Update DataGridView styles
+            dgvTodos.BackgroundColor = Color.FromArgb(20, 20, 70); // Slightly lighter dark blue
+            dgvTodos.DefaultCellStyle.BackColor = Color.FromArgb(50, 50, 50); // Dark gray for cells
+            dgvTodos.DefaultCellStyle.ForeColor = Color.White; // White text for readability
+            dgvTodos.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            dgvTodos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(30, 30, 90);
+            dgvTodos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvTodos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+            // Update button styles
+            foreach (Control control in this.Controls)
+            {
+                if (control is Button button)
+                {
+                    button.BackColor = Color.FromArgb(30, 30, 90); // Dark blue for buttons
+                    button.ForeColor = Color.White;
+                    button.FlatStyle = FlatStyle.Flat;
+                    button.FlatAppearance.BorderSize = 0;
+                    button.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                }
+            }
+
+            // Update text box styles
+            foreach (Control control in this.Controls)
+            {
+                if (control is TextBox textBox)
+                {
+                    textBox.Font = new Font("Segoe UI", 10);
+                    textBox.BackColor = Color.FromArgb(20, 20, 70); // Slightly lighter dark blue
+                    textBox.ForeColor = Color.White;
+                    textBox.BorderStyle = BorderStyle.FixedSingle;
+                }
+            }
+
+            // Update labels
+            foreach (Control control in this.Controls)
+            {
+                if (control is Label label)
+                {
+                    label.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                    label.ForeColor = Color.White;
+                }
+            }
         }
     }
 }

@@ -29,6 +29,26 @@ namespace NETWinFormsWithSqliteTodos.Migrations
                 type: "TEXT",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+
+            migrationBuilder.AddColumn<string>(
+                name: "Priority",
+                table: "ToDos",
+                type: "TEXT",
+                nullable: false,
+                defaultValue: "Medium");
+
+            migrationBuilder.AddColumn<bool>(
+                name: "IsRecurring",
+                table: "ToDos",
+                type: "INTEGER",
+                nullable: false,
+                defaultValue: false);
+
+            migrationBuilder.AddColumn<TimeSpan>(
+                name: "RecurrenceInterval",
+                table: "ToDos",
+                type: "TEXT",
+                nullable: true);
         }
 
         /// <inheritdoc />

@@ -79,6 +79,7 @@
             gboxTodos.TabIndex = 0;
             gboxTodos.TabStop = false;
             gboxTodos.Text = "ToDos ";
+            gboxTodos.Dock = DockStyle.Fill;
             // 
             // pnlToDosBody
             // 
@@ -89,6 +90,7 @@
             pnlToDosBody.Name = "pnlToDosBody";
             pnlToDosBody.Size = new Size(764, 302);
             pnlToDosBody.TabIndex = 1;
+            pnlToDosBody.Dock = DockStyle.Fill;
             // 
             // dgvTodos
             // 
@@ -104,6 +106,7 @@
             dgvTodos.Size = new Size(758, 314);
             dgvTodos.TabIndex = 0;
             dgvTodos.CellDoubleClick += dgvTodos_CellDoubleClick;
+            dgvTodos.Dock = DockStyle.Fill;
             // 
             // Id
             // 
@@ -166,6 +169,7 @@
             pnlToDosMaster.Name = "pnlToDosMaster";
             pnlToDosMaster.Size = new Size(764, 144);
             pnlToDosMaster.TabIndex = 0;
+            pnlToDosMaster.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             // 
             // pnlStatus
             // 
@@ -250,7 +254,7 @@
             dateTodoBy.Name = "dateTodoBy";
             dateTodoBy.Size = new Size(200, 22);
             dateTodoBy.TabIndex = 9;
-            dateTodoBy.Value = new DateTime(2023, 6, 21, 0, 0, 0, 0);
+            dateTodoBy.Value = new DateTime(2028, 6, 21, 0, 0, 0, 0);
             // 
             // lblTodoBy
             // 
@@ -337,6 +341,7 @@
             pboxAddNewToDo.TabStop = false;
             pboxAddNewToDo.Click += pboxAddNewToDo_Click;
             pboxAddNewToDo.MouseHover += pboxAddNewToDo_MouseHover;
+            pboxAddNewToDo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             // 
             // frmMain
             // 

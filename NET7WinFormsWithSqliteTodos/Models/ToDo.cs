@@ -31,5 +31,9 @@ namespace NETWinFormsWithSqliteTodos.Models
 
         [Required]        
         public DateTime DateAdded { get; set; }
+
+        public string Priority { get; set; } = "Medium"; // New field for task prioritization
+        public bool IsRecurring { get; set; } = false; // New field for recurring tasks
+        public TimeSpan? RecurrenceInterval { get; set; } // Optional recurrence interval
     }
 }
