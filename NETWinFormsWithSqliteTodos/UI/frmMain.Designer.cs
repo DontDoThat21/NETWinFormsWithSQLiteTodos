@@ -38,7 +38,7 @@
             Description = new DataGridViewTextBoxColumn();
             Status = new DataGridViewTextBoxColumn();
             CompleteBy = new DataGridViewTextBoxColumn();
-            DateTime = new DataGridViewTextBoxColumn();
+            DateTimeCol = new DataGridViewTextBoxColumn();
             contextMenuDGVTodos = new ContextMenuStrip(components);
             deleteToolStripMenuItem = new ToolStripMenuItem();
             pnlToDosMaster = new Panel();
@@ -97,7 +97,7 @@
             dgvTodos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTodos.BackgroundColor = Color.LightSlateGray;
             dgvTodos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTodos.Columns.AddRange(new DataGridViewColumn[] { Id, TodoName, Description, Status, CompleteBy, DateTime });
+            dgvTodos.Columns.AddRange(new DataGridViewColumn[] { Id, TodoName, Description, Status, CompleteBy, DateTimeCol });
             dgvTodos.ContextMenuStrip = contextMenuDGVTodos;
             dgvTodos.Location = new Point(3, 3);
             dgvTodos.Name = "dgvTodos";
@@ -134,10 +134,10 @@
             CompleteBy.HeaderText = "Complete By";
             CompleteBy.Name = "CompleteBy";
             // 
-            // DateTime
+            // DateTimeCol
             // 
-            DateTime.HeaderText = "Date Added";
-            DateTime.Name = "DateTime";
+            DateTimeCol.HeaderText = "Date Added";
+            DateTimeCol.Name = "DateTimeCol";
             // 
             // contextMenuDGVTodos
             // 
@@ -389,7 +389,7 @@
         private DataGridViewTextBoxColumn Description;
         private DataGridViewTextBoxColumn Status;
         private DataGridViewTextBoxColumn CompleteBy;
-        private DataGridViewTextBoxColumn DateTime;
+        private DataGridViewTextBoxColumn DateTimeCol;
         public DataGridView dgvTodos;
         private ContextMenuStrip contextMenuDGVTodos;
         private ToolStripMenuItem deleteToolStripMenuItem;

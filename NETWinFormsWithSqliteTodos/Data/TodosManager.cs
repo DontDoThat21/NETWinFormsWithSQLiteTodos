@@ -34,7 +34,32 @@ namespace NETWinFormsWithSqliteTodos.Data
 
         public async Task<bool> DeleteAsync(int id)
         {
-            return await _dbContext.DeleteAsync(id); // Use DeleteAsync from TodosGateway
+            try
+            {
+                if (id <= 0)
+                {
+                    throw new ArgumentException("Invalid ID provided for deletion.");
+                }
+
+                return await _dbContext.DeleteAsync(id);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (if logging is implemented)
+                Console.WriteLine($"Error in TodosManager.DeleteAsync: {ex.Message}");
+                return false;
+            }
+        }
+
+        // Add this method to TodosManager class
+        public async Task<ToDo> GetByIdAsync(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("Invalid ID provided.");
+            }
+
+            return await _dbContext.GetByIdAsync(id);
         }
     }
 }
